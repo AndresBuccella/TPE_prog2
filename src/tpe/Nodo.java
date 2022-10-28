@@ -26,8 +26,6 @@ public class Nodo implements Comparable<Nodo>{
 		}else
 			irAlSiguiente(otro);
 	}
-
-	
 	
 	public void irAlSiguiente(Nodo otro) {
 		this.sigNodo.addNodo(otro);
