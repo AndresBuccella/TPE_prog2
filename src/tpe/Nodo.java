@@ -11,26 +11,23 @@ public class Nodo implements Comparable<Nodo>{
 	
 	public void addNodo(Nodo otro) {
 		
-		boolean soyMayorQueOtro = this.compareTo(otro) == 1;
-		boolean somosIguales = this.compareTo(otro) == 0;
-		boolean sigVacio = this.sigNodo == null;
-		boolean sigMayor = this.sigNodo.compareTo(otro) == 1;
-	
-		if(soyMayorQueOtro) 
+		if(this.compareTo(otro) == 1) 
 			otro.setSigNodo(this);
-		else if(somosIguales)
+		else if(this.compareTo(otro) == 0)
 			otro.setSigNodo(this);
 		else 
 			//this es menor al que se quiere insertar, entonces =>
-			if (sigVacio) //primero se pregunta si el siguiente esta vacio para no romper
+			if (this.sigNodo == null) //primero se pregunta si el siguiente esta vacio para no romper
 							//al preguntar si el siguiente es mayor a otro
 				this.setSigNodo(otro);
-			else if (sigMayor) {
+			else if (this.sigNodo.compareTo(otro) == 1) {
 				otro.setSigNodo(this.getSigNodo());
 				this.setSigNodo(otro);
 		}else
 			irAlSiguiente(otro);
 	}
+
+	
 	
 	public void irAlSiguiente(Nodo otro) {
 		this.sigNodo.addNodo(otro);
@@ -80,7 +77,6 @@ public class Nodo implements Comparable<Nodo>{
 		n1.addNodo(n5);
 		n1.addNodo(n4);
 		n1.addNodo(n7);
-		n2.addNodo(n2);
 
 		System.out.println(n1);
 		System.out.println(n2); //se puede imprimir el anterior?
