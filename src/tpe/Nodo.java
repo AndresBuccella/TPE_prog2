@@ -116,6 +116,7 @@ public class Nodo { // debiera de ser comparator
 		raiz.addNodo(n11, comp);
 		// System.out.println(n7.obtenerPos(9));
 		// System.out.println(n2.obtenerPos(3));
+		raiz.deleteNodo(10);
 		
 
 		System.out.println(raiz);
