@@ -17,21 +17,19 @@ public class Nodo { // debiera de ser comparator
 
 	public void addNodo(Nodo otro, Comparator<Nodo> comp) {
 
-		if ((comp.compare(this, otro) == 1)) // si es mayor o igual
-			otro.setSigNodo(this);
-		else if (comp.compare(this, otro) == 0) // si es igual
-			otro.setSigNodo(this);
-		else {
-			// this es menor al que se quiere insertar, entonces =>
-			if (this.sigNodo == null) // primero se pregunta si el siguiente esta vacio para no romper
-				// al preguntar si el siguiente es mayor a otro
-				this.setSigNodo(otro);
-			else if (comp.compare(this.sigNodo, otro) == 1) {
-				otro.setSigNodo(this.getSigNodo());
-				this.setSigNodo(otro);
-			} else
-				irAlSiguiente(otro, comp);
+		if(comp.compare(this, otro) == 1) {
+			otro.sigNodo = this;
 		}
+		else
+			if(this.sigNodo == null)
+				this.sigNodo = otro;
+			else
+				if((comp.compare(this, otro) == 0) ||
+						(comp.compare(this.sigNodo, otro) == 1)) {
+					otro.sigNodo = this.sigNodo;
+					this.sigNodo = otro;
+				}else 
+					this.sigNodo.addNodo(otro, comp);
 	}
 
 	public void irAlSiguiente(Nodo otro, Comparator<Nodo> comp) {
@@ -87,7 +85,7 @@ public class Nodo { // debiera de ser comparator
 	public String toString() {
 		// salio de la galera JAJAJA
 		if (this.sigNodo != null)
-			return this.id + " " + this.sigNodo;
+			return this.id + " " + this.getSigNodo();
 		return this.id + "";
 	}
 
@@ -104,18 +102,21 @@ public class Nodo { // debiera de ser comparator
 		Nodo n7 = new Nodo(7);
 		Nodo n8 = new Nodo(8);
 		Nodo n9 = new Nodo(9);
+		Nodo n11 = new Nodo(4);
 		// n1.addNodo(n1);
-		raiz.addNodo(n2, comp);
-		raiz.addNodo(n3, comp);
+		raiz.addNodo(n9, comp);
 		raiz.addNodo(n4, comp);
-		raiz.addNodo(n5, comp);
+		raiz.addNodo(n3, comp);
 		raiz.addNodo(n6, comp);
+		raiz.addNodo(n5, comp);
 		raiz.addNodo(n7, comp);
 		raiz.addNodo(n8, comp);
-		raiz.addNodo(n9, comp);
+		raiz.addNodo(n2, comp);
+		raiz.addNodo(n10, comp);
+		raiz.addNodo(n11, comp);
 		// System.out.println(n7.obtenerPos(9));
 		// System.out.println(n2.obtenerPos(3));
-		raiz.deleteNodo(8);
+		
 
 		System.out.println(raiz);
 		// System.out.println(n7);
