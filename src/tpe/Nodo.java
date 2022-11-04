@@ -66,7 +66,6 @@ public class Nodo { // debiera de ser comparator
 			this.sigNodo.obtenerPos(id); // no se puede pasar la suma por parámetro
 		} else if ((this.id == id))
 			return contador;
-
 		return contador;
 	}
 
@@ -88,7 +87,7 @@ public class Nodo { // debiera de ser comparator
 			return this.id + " " + this.getSigNodo();
 		return this.id + "";
 	}
-
+/*
 	public static void main(String[] args) {
 		Nodo raiz = new Nodo(1);
 		Comparator comp = new ComparaPorEdad();
@@ -124,5 +123,5 @@ public class Nodo { // debiera de ser comparator
 		// System.out.println(n2); //se puede imprimir el anterior? como agregar menor
 		// al primero
 	}
-
+*/
 }

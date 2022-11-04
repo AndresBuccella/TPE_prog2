@@ -1,4 +1,4 @@
-package tpe;
+/*package tpe;
 
 public class Basura {
 	package tpe;
@@ -128,5 +128,5 @@ public class Basura {
 			// al primero
 		}
 
-	}
+	}*/
 
