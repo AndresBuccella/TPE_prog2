@@ -59,11 +59,23 @@ public class Nodo { // debiera de ser comparator
 	public void deleteSig() {
 		this.sigNodo = null;
 	}
+	
+	public void deleteAllOccurrences(Nodo otro, Comparator<Nodo>comp) {//no borra los ultimos, fijarse los if
+		
+		if(this.sigNodo!=null) {
+			while((this.sigNodo!=null)&&(comp.compare(this.sigNodo,otro)==0)) {
+				Nodo auxNodo = this.sigNodo;
+				this.sigNodo= this.sigNodo.getSigNodo();
+				auxNodo.setSigNodo(null);
+			}
+			this.sigNodo.deleteAllOccurrences(otro, comp);
+		}
+	}
 
 	public int obtenerPos(int id) {
 		if ((this.id != id) && (this.sigNodo != null)) {
 			contador++;
-			this.sigNodo.obtenerPos(id); // no se puede pasar la suma por par·metro
+			this.sigNodo.obtenerPos(id); // no se puede pasar la suma por par√°metro
 		} else if ((this.id == id))
 			return contador;
 		return contador;
@@ -116,7 +128,7 @@ public class Nodo { // debiera de ser comparator
 		// System.out.println(n7.obtenerPos(9));
 		// System.out.println(n2.obtenerPos(3));
 		raiz.deleteNodo(10);
-		
+		raiz.deleteAllOccurrences(n9, comp);
 
 		System.out.println(raiz);
 		// System.out.println(n7);
