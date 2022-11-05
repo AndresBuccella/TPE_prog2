@@ -55,21 +55,43 @@ public class Nodo { // debiera de ser comparator
 			this.sigNodo.deleteNodo(pos);
 		}
 	}
-
+/*
 	public void deleteSig() {
 		this.sigNodo = null;
+	}
+*/
+	
+	public void deleteSig() {
+		if(this.sigNodo.getSigNodo()!=null) {
+			Nodo aux = this.sigNodo;
+			this.sigNodo = this.sigNodo.getSigNodo();
+			aux.setSigNodo(null);
+		}else
+			this.sigNodo = null;
 	}
 	
 	public void deleteAllOccurrences(Nodo otro, Comparator<Nodo>comp) {//no borra los ultimos, fijarse los if
 		
 		if(this.sigNodo!=null) {
+			while(comp.compare(this.sigNodo, otro) == 0) {//no se tendria que encargar raiz de todo esto?
+				this.deleteSig();
+			}
+			this.sigNodo.deleteAllOccurrences(otro, comp);
+		}
+		
+		
+		
+		
+		
+		
+		/*if(this.sigNodo!=null) {
 			while((this.sigNodo!=null)&&(comp.compare(this.sigNodo,otro)==0)) {
 				Nodo auxNodo = this.sigNodo;
 				this.sigNodo= this.sigNodo.getSigNodo();
 				auxNodo.setSigNodo(null);
 			}
 			this.sigNodo.deleteAllOccurrences(otro, comp);
-		}
+		}*/
 	}
 
 	public int obtenerPos(int id) {
@@ -99,8 +121,8 @@ public class Nodo { // debiera de ser comparator
 			return this.id + " " + this.getSigNodo();
 		return this.id + "";
 	}
-/*
-	public static void main(String[] args) {
+
+/*	public static void main(String[] args) {
 		Nodo raiz = new Nodo(1);
 		Comparator comp = new ComparaPorEdad();
 		Nodo n2 = new Nodo(2);
@@ -127,7 +149,7 @@ public class Nodo { // debiera de ser comparator
 		raiz.addNodo(n11, comp);
 		// System.out.println(n7.obtenerPos(9));
 		// System.out.println(n2.obtenerPos(3));
-		raiz.deleteNodo(10);
+		//raiz.deleteNodo(10);
 		raiz.deleteAllOccurrences(n9, comp);
 
 		System.out.println(raiz);
