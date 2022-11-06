@@ -1,20 +1,30 @@
 package tpe;
 
-import java.util.Comparator;
-
-import tpe.comparador.*;
-
 public class Nodo { // debiera de ser comparator
 
 	private Nodo sigNodo;
 	private int id;
-	private static int contador;
 
 	public Nodo(int id) {
 		this.id = id;
-		contador = 0;
+	}
+	public void setSigNodo(Nodo sig) {
+		this.sigNodo = sig;
 	}
 
+	public Nodo getSigNodo() {
+		return this.sigNodo;
+	}
+
+	public int getId() {
+		return this.id;
+	}
+	
+	public String toString() {
+		return this.id + "";
+	}
+
+/*
 	public void addNodo(Nodo otro, Comparator<Nodo> comp) {
 
 		if(comp.compare(this, otro) == 1) {
@@ -35,7 +45,8 @@ public class Nodo { // debiera de ser comparator
 	public void irAlSiguiente(Nodo otro, Comparator<Nodo> comp) {
 		this.sigNodo.addNodo(otro, comp);
 	}
-
+*/
+/*
 	public void deleteNodo(int pos) {
 		
 		if (pos == 0)
@@ -55,21 +66,14 @@ public class Nodo { // debiera de ser comparator
 			this.sigNodo.deleteNodo(pos);
 		}
 	}
+*/
 /*
 	public void deleteSig() {
 		this.sigNodo = null;
 	}
 */
-	
-	public void deleteSig() {
-		if(this.sigNodo.getSigNodo()!=null) {
-			Nodo aux = this.sigNodo;
-			this.sigNodo = this.sigNodo.getSigNodo();
-			aux.setSigNodo(null);
-		}else
-			this.sigNodo = null;
-	}
-	
+
+/*	
 	public void deleteAllOccurrences(Nodo otro, Comparator<Nodo>comp) {//no borra los ultimos, fijarse los if
 		
 		if(this.sigNodo!=null) {
@@ -91,10 +95,10 @@ public class Nodo { // debiera de ser comparator
 				auxNodo.setSigNodo(null);
 			}
 			this.sigNodo.deleteAllOccurrences(otro, comp);
-		}*/
+		}
 	}
-
-	public int obtenerPos(int id) {
+*/
+/*	public int obtenerPos(int id) {
 		if ((this.id != id) && (this.sigNodo != null)) {
 			contador++;
 			this.sigNodo.obtenerPos(id); // no se puede pasar la suma por parámetro
@@ -102,26 +106,15 @@ public class Nodo { // debiera de ser comparator
 			return contador;
 		return contador;
 	}
-
-	public void setSigNodo(Nodo sig) {
-		this.sigNodo = sig;
-	}
-
-	public Nodo getSigNodo() {
-		return this.sigNodo;
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public String toString() {
+*/
+	
+/*	public String toString() {
 		// salio de la galera JAJAJA
 		if (this.sigNodo != null)
 			return this.id + " " + this.getSigNodo();
 		return this.id + "";
 	}
-
+*/
 /*	public static void main(String[] args) {
 		Nodo raiz = new Nodo(1);
 		Comparator comp = new ComparaPorEdad();
