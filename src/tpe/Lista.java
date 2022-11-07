@@ -8,9 +8,11 @@ public class Lista {
 
 	private Nodo raiz;
 	private Nodo puntero;
+	private String auxToString; //discutible
 	
 	public Lista(Nodo primerNodo) {
 		this.raiz = primerNodo;
+		this.auxToString = "";
 	}
 	
 	
@@ -39,17 +41,18 @@ public class Lista {
 	
 	public void addNext(Nodo otro) {
 		otro.setSigNodo(this.puntero.getSigNodo());
-		System.out.println(this.puntero.getSigNodo());
 		this.puntero.setSigNodo(otro);
-		System.out.println(puntero);
 	}
 	
 	public String toString() {//no se como hacer para mostrar la lista sin que el nodo se encargue
 		if(this.hasNext()) {
-			this.next().toString;
-			return this.puntero.toString();
+			auxToString+=this.puntero.toString() + " ";
+			this.next();
+			toString();
+		}else {
+			auxToString+=this.puntero.toString();
 		}
-		return this.puntero.toString();
+		return auxToString;
 	}
 
 	public void setRaiz(Nodo n) {
@@ -118,12 +121,15 @@ public class Lista {
 		Nodo n5 = new Nodo(5);
 		Nodo n6 = new Nodo(6);
 		Nodo n7 = new Nodo(7);
-		Nodo n8 = new Nodo(8);
-		Nodo n9 = new Nodo(9);
-*/		Nodo n11 = new Nodo(1);
+*/		Nodo n8 = new Nodo(0);
+		Nodo n9 = new Nodo(0);
+		Nodo n11 = new Nodo(0);
 		Lista raiz = new Lista(n1);
 		raiz.addNodo(n0, comp);
 		raiz.addNodo(n2, comp);
+		raiz.addNodo(n11, comp);
+		raiz.addNodo(n9, comp);
+		raiz.addNodo(n8, comp);
 //		raiz.addNodo(n3, comp);
 //		raiz.addNodo(n11, comp);
 		System.out.println(raiz);
