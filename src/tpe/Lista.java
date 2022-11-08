@@ -1,10 +1,11 @@
 package tpe;
 
 import java.util.Comparator;
+import java.util.Iterator;
 
 import tpe.comparador.ComparaPorEdad;
 
-public class Lista {
+public class Lista implements Iterable<Nodo>{
 
 	private Nodo raiz;
 	private Nodo puntero;
@@ -48,36 +49,47 @@ public class Lista {
 	}
 	
 
-	public void addNodo(Nodo otro, Comparator<Nodo> comp) {
-		if(comp.compare(raiz, otro) == 1) {
-			otro.setSigNodo(raiz);
+	public void addNodo(Nodo otro, Comparator<Nodo> comp) { //asumimos que el nodo que agregamos no apunta a nada. 
+		if(this.puntero!=null) {							//Tenemos que tener en cuenta si apunta a algo?
+			if(comp.compare(raiz, otro) == 1) {
+				otro.setSigNodo(raiz);
+				this.setRaiz(otro);
+			}else 
+				if(!hasNext()) {
+					puntero.setSigNodo(otro);
+					this.setPuntero(raiz);	
+				}
+				else
+					if(comp.compare(this.puntero.getSigNodo(), otro) == 1) {
+						otro.setSigNodo(getSigNodoLista());
+						this.puntero.setSigNodo(otro);
+						this.setPuntero(raiz);
+					}
+					else {
+						this.next();
+						this.addNodo(otro, comp);//recursion			
+					}
+		}else
 			this.setRaiz(otro);
-		}else 
-			if(!hasNext()) {
-				puntero.setSigNodo(otro);
-				this.setPuntero(raiz);	
-			}
-			else
-				if(comp.compare(this.puntero.getSigNodo(), otro) == 1) {
-					otro.setSigNodo(getSigNodoLista());
-					this.puntero.setSigNodo(otro);
-					this.setPuntero(raiz);
-				}
-				else {
-					this.next();
-					this.addNodo(otro, comp);//recursion			
-				}
 	}
 	
 	public void deleteSig() {
 		Nodo aux = this.puntero.getSigNodo();
 		this.puntero.setSigNodo(this.puntero.getSigNodo().getSigNodo());
-		aux.setSigNodo(null);;
+		aux.setSigNodo(null);
 	}
 	
-	public void deleteAllOccurrences(Nodo otro, Comparator<Nodo>comp) {
+	public void deleteAllOccurrences(Lista l, Nodo otro, Comparator<Nodo>comp) {
 	
-		if(this.puntero!=null) {			
+		for(Nodo n : l) {
+			if(comp.compare(n, otro) == 0) {
+				remove();
+			}
+		}
+/*
+ * Funciona de pelos
+ * 
+ * 		if(this.puntero!=null) {			
 			if (comp.compare(this.puntero, otro) == 0) {//si es el primero, se elimina y apunta al segundo y se vuelve a
 				this.raiz = this.raiz.getSigNodo();		//llamar la funcion
 				this.puntero.setSigNodo(null);
@@ -104,101 +116,41 @@ public class Lista {
 				}
 			this.setPuntero(this.raiz);
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-/*		if(!this.hasNext()) {
-			if(comp.compare(this.puntero, otro) == 0)//si es la primer ocurrencia y no tiene siguiente
-				this.setRaiz(null);					//pregunta de mas en la ultima iteracion, pero no le encuentro la vuelta
-		}else
-			if(comp.compare(this.puntero, otro) == 0) { //Si es el primero pero tiene siguiente
-				this.raiz = this.raiz.getSigNodo();		//no usa deleteSig porque es la primer ocurrencia
-				this.puntero.setSigNodo(null);
-				this.setPuntero(raiz);
-			}else
-				while(comp.compare(this.puntero.getSigNodo(), otro) == 0) {
-					this.deleteSig();					
-				}
-		this.next();
-		this.deleteAllOccurrences(otro, comp);
-		this.setPuntero(raiz);
-*/		
-		
-		
-		
-		
-		
-/*		if(this.hasNext()) {
-			if(comp.compare(this.puntero, otro) == 0) { //solo para la primer ocurrencia
-				this.raiz.setSigNodo(null);
-				this.setRaiz(getSigNodoLista());
-				deleteAllOccurrences(otro, comp);
-			}else
-				if(comp.compare(getSigNodoLista(), otro) != 0) { //se solucionaria con un while?
-					this.next();
-					this.deleteAllOccurrences(otro, comp);
-				}else{
-					this.deleteSig();
-				}
-		}*/
+*/
+	}
+	
+	public void deleteByPos(int pos) {
+		if (this.puntero!=null) {
+			
+		}
 	}
 	
 	
 	
 	public String toString() {//no se como hacer para no usar un auxiliar
-		
-		while(this.hasNext()) {
-			auxToString+=this.puntero.toString() + " ";
-			this.next();
-		}
-		auxToString+=this.puntero.toString();
-		String resultado = auxToString;
-		auxToString = "";
-		this.setPuntero(this.raiz);
-		return resultado;
+		if(this.puntero!=null) {
+			while(this.hasNext()) {
+				auxToString+=this.puntero.toString() + " ";
+				this.next();
+			}
+			auxToString+=this.puntero.toString();
+			String resultado = auxToString;
+			auxToString = "";
+			this.setPuntero(this.raiz);
+			return resultado;			
+		}else
+			return "Lista vacia"; //ver otra forma de informar esto
 	}
 	/*
 	public void addLista(Lista otraRaiz) {
 		
 	}
 	*/	
-/*	public void deleteSig() {
-		if(this.sigNodo.getSigNodo()!=null) {
-			Nodo aux = this.sigNodo;
-			this.sigNodo = this.sigNodo.getSigNodo();
-			aux.setSigNodo(null);
-		}else
-			this.sigNodo = null;
-	}
+/*	
 	public void deleteLista() {
 		this.aux.getSigNodo();
 		this.aux = null;
 		this.raiz = null; //esta feo porque se hace muchas veces pero no se me ocurre otra
-	}
-	
-	public void deleteAllOccurrences(Nodo otro, Comparator<Nodo>comp) {
-		if(comp.compare(raiz, otro) == 0) {
-			if(raiz.getSigNodo()!=null) {
-				Nodo auxNodo = raiz.getSigNodo();
-				this.raiz.setSigNodo(null);
-				this.raiz = auxNodo;			
-				System.out.println(raiz);	
-			}else
-				this.raiz = null;
-		}else if(this.raiz.getSigNodo()!=null) {
-			super.deleteAllOccurrences(otro, comp);
-		}
 	}
 */	
 	
@@ -207,6 +159,63 @@ public class Lista {
 	
 	
 	//zona de pruebas >:D
+	
+
+	public Iterator<Nodo> iterator() {
+		return new IteradorNodos();
+	}
+	
+	private class IteradorNodos implements Iterator<Nodo>{
+		private Nodo aux;
+		private Nodo anterior;
+        public IteradorNodos(){
+        	this.aux = raiz;
+        	this.anterior = raiz;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return this.aux.getSigNodo()!=null;
+        }
+
+        @Override
+        public Nodo next() {
+        	if(aux == anterior) {
+        		Nodo a = this.aux.getSigNodo();
+        		this.aux = this.aux.getSigNodo();
+        		return a;
+        	}else {
+        		Nodo a = this.aux.getSigNodo();
+        		this.aux = this.aux.getSigNodo();
+        		this.anterior = this.anterior.getSigNodo();
+        		return a;
+        	}
+        }
+
+        @Override
+        public void remove() {
+			if (this.aux != null) { //la lista no esta vacia
+				if (!hasNext()) {	//el siguiente es null
+					if(anterior == aux) {//si se cumple todo es una lista de un solo elemento
+						this.anterior = null;
+						this.aux = null;
+					}else {
+						this.anterior.setSigNodo(null);
+					}
+				}else {
+					this.anterior.setSigNodo(this.aux.getSigNodo());
+					this.aux.setSigNodo(null);
+				}
+				
+				this.anterior.setSigNodo(this.aux.getSigNodo());
+				this.aux.setSigNodo(null);
+    	   }
+ /*    		Nodo aux = this.aux.getSigNodo();
+    		this.aux.setSigNodo(this.aux.getSigNodo().getSigNodo());
+    		aux.setSigNodo(null);
+*/      }
+    }
+	
 	
 	public static void main(String[] args) {
 		Comparator comp = new ComparaPorEdad();
@@ -228,10 +237,10 @@ public class Lista {
 		Nodo n43 = new Nodo(4);
 		Lista raiz = new Lista(n11);
 		raiz.addNodo(n0, comp);
-		raiz.addNodo(n01, comp);
+/*		raiz.addNodo(n01, comp);
 		raiz.addNodo(n02, comp);
 		raiz.addNodo(n03, comp);
-		raiz.addNodo(n12, comp);
+*/		raiz.addNodo(n12, comp);
 		raiz.addNodo(n13, comp);
 		raiz.addNodo(n21, comp);
 		raiz.addNodo(n22, comp);
@@ -242,12 +251,15 @@ public class Lista {
 		raiz.addNodo(n41, comp);
 		raiz.addNodo(n42, comp);
 		raiz.addNodo(n43, comp);
+		for(Nodo nodo : raiz) {
+			
+		}
 //		raiz.addNodo(n3, comp);
 //		raiz.addNodo(n11, comp);
 //		System.out.println(raiz);
-		System.out.println(raiz);
-		raiz.deleteAllOccurrences(n41, comp);
-		System.out.println(raiz);
+//		System.out.println(raiz);
+//		raiz.deleteAllOccurrences(n41, comp);
+//		System.out.println(raiz);
 //		System.out.println(n0);
 //		System.out.println(n1);
 //		System.out.println(n2);
@@ -277,4 +289,5 @@ public class Lista {
 		// System.out.println(n2); //se puede imprimir el anterior? como agregar menor
 		// al primero
 	}
+
 }

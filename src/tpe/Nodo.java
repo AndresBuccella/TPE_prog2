@@ -1,5 +1,7 @@
 package tpe;
 
+import java.util.Iterator;
+
 public class Nodo { // debiera de ser comparator
 
 	private Nodo sigNodo;
