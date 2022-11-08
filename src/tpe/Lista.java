@@ -1,11 +1,13 @@
 package tpe;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 
 import tpe.comparador.ComparaPorEdad;
 
-public class Lista implements Iterable<Nodo>{
+public class Lista implements Iterable<Object>{
 
 	private Nodo raiz;
 	private Nodo puntero;
@@ -79,17 +81,11 @@ public class Lista implements Iterable<Nodo>{
 		aux.setSigNodo(null);
 	}
 	
-	public void deleteAllOccurrences(Lista l, Nodo otro, Comparator<Nodo>comp) {
-	
-		for(Nodo n : l) {
-			if(comp.compare(n, otro) == 0) {
-				remove();
-			}
-		}
+	public void deleteAllOccurrences(Nodo otro, Comparator<Nodo>comp) {
 /*
  * Funciona de pelos
- * 
- * 		if(this.puntero!=null) {			
+ * */
+ 		if(this.puntero!=null) {			
 			if (comp.compare(this.puntero, otro) == 0) {//si es el primero, se elimina y apunta al segundo y se vuelve a
 				this.raiz = this.raiz.getSigNodo();		//llamar la funcion
 				this.puntero.setSigNodo(null);
@@ -116,12 +112,25 @@ public class Lista implements Iterable<Nodo>{
 				}
 			this.setPuntero(this.raiz);
 		}
-*/
+
 	}
 	
 	public void deleteByPos(int pos) {
-		if (this.puntero!=null) {
-			
+		if (this.puntero!=null && pos>=0) {
+			if (pos == 0){
+				this.raiz = this.raiz.getSigNodo();
+				this.puntero.setSigNodo(null);
+				this.puntero = this.raiz;
+			}
+			else if (this.puntero.getSigNodo() != null) {
+				if (pos == 1)
+					this.deleteSig();
+			}
+			if (pos > 1) {
+				this.puntero = this.puntero.getSigNodo();
+				pos--;
+				deleteByPos(pos);
+			}
 		}
 	}
 	
@@ -161,59 +170,28 @@ public class Lista implements Iterable<Nodo>{
 	//zona de pruebas >:D
 	
 
-	public Iterator<Nodo> iterator() {
+	public Iterator<Object> iterator() {
 		return new IteradorNodos();
 	}
 	
-	private class IteradorNodos implements Iterator<Nodo>{
-		private Nodo aux;
-		private Nodo anterior;
+	private class IteradorNodos implements Iterator<Object>{
+		private Nodo actual;
         public IteradorNodos(){
-        	this.aux = raiz;
-        	this.anterior = raiz;
+        	this.actual = raiz;
         }
 
         @Override
         public boolean hasNext() {
-            return this.aux.getSigNodo()!=null;
+            return this.actual!=null;
         }
 
         @Override
-        public Nodo next() {
-        	if(aux == anterior) {
-        		Nodo a = this.aux.getSigNodo();
-        		this.aux = this.aux.getSigNodo();
-        		return a;
-        	}else {
-        		Nodo a = this.aux.getSigNodo();
-        		this.aux = this.aux.getSigNodo();
-        		this.anterior = this.anterior.getSigNodo();
-        		return a;
-        	}
+        public Object next() {
+        	Object aux=this.actual.getId();
+        	this.actual = this.actual.getSigNodo();
+        	return aux;
         }
 
-        @Override
-        public void remove() {
-			if (this.aux != null) { //la lista no esta vacia
-				if (!hasNext()) {	//el siguiente es null
-					if(anterior == aux) {//si se cumple todo es una lista de un solo elemento
-						this.anterior = null;
-						this.aux = null;
-					}else {
-						this.anterior.setSigNodo(null);
-					}
-				}else {
-					this.anterior.setSigNodo(this.aux.getSigNodo());
-					this.aux.setSigNodo(null);
-				}
-				
-				this.anterior.setSigNodo(this.aux.getSigNodo());
-				this.aux.setSigNodo(null);
-    	   }
- /*    		Nodo aux = this.aux.getSigNodo();
-    		this.aux.setSigNodo(this.aux.getSigNodo().getSigNodo());
-    		aux.setSigNodo(null);
-*/      }
     }
 	
 	
@@ -235,13 +213,13 @@ public class Lista implements Iterable<Nodo>{
 		Nodo n41 = new Nodo(4);
 		Nodo n42 = new Nodo(4);
 		Nodo n43 = new Nodo(4);
-		Lista raiz = new Lista(n11);
-		raiz.addNodo(n0, comp);
+		Lista raiz = new Lista(n0);
 /*		raiz.addNodo(n01, comp);
 		raiz.addNodo(n02, comp);
 		raiz.addNodo(n03, comp);
 */		raiz.addNodo(n12, comp);
 		raiz.addNodo(n13, comp);
+		raiz.addNodo(n0, comp);
 		raiz.addNodo(n21, comp);
 		raiz.addNodo(n22, comp);
 		raiz.addNodo(n23, comp);
@@ -251,8 +229,23 @@ public class Lista implements Iterable<Nodo>{
 		raiz.addNodo(n41, comp);
 		raiz.addNodo(n42, comp);
 		raiz.addNodo(n43, comp);
-		for(Nodo nodo : raiz) {
-			
+		for(Object nodo : raiz) {
+			System.out.println(nodo);
+		}
+		System.out.println("----");
+		System.out.println(raiz);
+		
+		raiz.deleteAllOccurrences(n0, comp);
+		System.out.println("Delete all ocurrences "+n0);
+		for(Object nodo : raiz) {
+			System.out.println(nodo);
+		}
+		
+		System.out.println("Borrar en posicion 11");
+		raiz.deleteByPos(11);
+		
+		for(Object nodo : raiz) {
+			System.out.println(nodo);
 		}
 //		raiz.addNodo(n3, comp);
 //		raiz.addNodo(n11, comp);
