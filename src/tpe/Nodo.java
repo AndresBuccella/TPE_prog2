@@ -1,10 +1,11 @@
 package tpe;
 
 import java.util.Comparator;
+import java.util.Iterator;
 
 import tpe.comparador.*;
 
-public class Nodo { // debiera de ser comparator
+public class Nodo implements Iterable<Nodo>{ // debiera de ser comparator
 
 	private Nodo sigNodo;
 	private int id;
@@ -15,7 +16,7 @@ public class Nodo { // debiera de ser comparator
 		contador = 0;
 	}
 
-	public void addNodo(Nodo otro, Comparator<Nodo> comp) {
+	public void addNodo(Nodo otro, Comparator<Nodo> comp) {//no se agregan antes
 
 		if(comp.compare(this, otro) == 1) {
 			otro.sigNodo = this;
@@ -62,14 +63,19 @@ public class Nodo { // debiera de ser comparator
 	
 	public void deleteAllOccurrences(Nodo otro, Comparator<Nodo>comp) {//no borra los ultimos, fijarse los if
 		
-		if(this.sigNodo!=null) {
+		for(Nodo n : this) {
+			if(comp.compare(n, otro) == 0) {
+				iterator().remove();
+			}
+		}
+/*		if(this.sigNodo!=null) {
 			while((this.sigNodo!=null)&&(comp.compare(this.sigNodo,otro)==0)) {
 				Nodo auxNodo = this.sigNodo;
 				this.sigNodo= this.sigNodo.getSigNodo();
 				auxNodo.setSigNodo(null);
 			}
 			this.sigNodo.deleteAllOccurrences(otro, comp);
-		}
+		}*/
 	}
 
 	public int obtenerPos(int id) {
@@ -94,17 +100,73 @@ public class Nodo { // debiera de ser comparator
 	}
 
 	public String toString() {
+		return this.id + "";
 		// salio de la galera JAJAJA
-		if (this.sigNodo != null)
+/*		if (this.sigNodo != null)
 			return this.id + " " + this.getSigNodo();
 		return this.id + "";
+*/	}
+	
+	public Iterator<Nodo> iterator() {
+		return new IteradorNodos(this);
 	}
-/*
+	
+	private class IteradorNodos implements Iterator<Nodo>{
+		private Nodo aux;
+		private Nodo anterior;
+        public IteradorNodos(Nodo primero){
+        	this.aux = primero;
+        	this.anterior = primero;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return this.aux.getSigNodo()!=null;
+        }
+
+        @Override
+        public Nodo next() {
+        	if(aux == anterior) {
+        		Nodo a = this.aux.getSigNodo();
+        		this.aux = this.aux.getSigNodo();
+        		return a;
+        	}else {
+        		Nodo a = this.aux.getSigNodo();
+        		this.aux = this.aux.getSigNodo();
+        		this.anterior = this.anterior.getSigNodo();
+        		return a;
+        	}
+        }
+
+        @Override
+        public void remove() {
+			if (this.aux != null) { //la lista no esta vacia
+				if (!hasNext()) {	//el siguiente es null
+					if(anterior == aux) {//si se cumple todo es una lista de un solo elemento
+						this.anterior = null;
+						this.aux = null;
+					}else {
+						this.anterior.setSigNodo(null);
+					}
+				}else {
+					this.anterior.setSigNodo(this.aux.getSigNodo());
+					this.aux.setSigNodo(null);
+				}
+				
+				this.anterior.setSigNodo(this.aux.getSigNodo());
+				this.aux.setSigNodo(null);
+    	   }
+ /*    		Nodo aux = this.aux.getSigNodo();
+    		this.aux.setSigNodo(this.aux.getSigNodo().getSigNodo());
+    		aux.setSigNodo(null);
+*/      }
+    }
+	
+
 	public static void main(String[] args) {
 		Nodo raiz = new Nodo(1);
 		Comparator comp = new ComparaPorEdad();
 		Nodo n2 = new Nodo(2);
-		Nodo n1 = new Nodo(1);
 		Nodo n3 = new Nodo(3);
 		Nodo n4 = new Nodo(4);
 		Nodo n10 = new Nodo(4);
@@ -125,7 +187,15 @@ public class Nodo { // debiera de ser comparator
 		raiz.addNodo(n2, comp);
 		raiz.addNodo(n10, comp);
 		raiz.addNodo(n11, comp);
-		// System.out.println(n7.obtenerPos(9));
+		int i = 0;
+		for(Nodo n : raiz) {
+			System.out.println("Pos: " + i++ + " Valor: " + n);
+		}
+		raiz.deleteAllOccurrences(n4, comp);
+		for(Nodo n : raiz) {
+			System.out.println("Pos: " + i++ + " Valor: " + n);
+		}
+/*		// System.out.println(n7.obtenerPos(9));
 		// System.out.println(n2.obtenerPos(3));
 		raiz.deleteNodo(10);
 		raiz.deleteAllOccurrences(n9, comp);
@@ -134,6 +204,6 @@ public class Nodo { // debiera de ser comparator
 		// System.out.println(n7);
 		// System.out.println(n2); //se puede imprimir el anterior? como agregar menor
 		// al primero
-	}
-*/
+*/	}
+
 }
