@@ -139,23 +139,23 @@ public class Nodo implements Iterable<Nodo>{ // debiera de ser comparator
         }
 
         @Override
-        public void remove() {
-			if (this.aux != null) { //la lista no esta vacia
-				if (!hasNext()) {	//el siguiente es null
-					if(anterior == aux) {//si se cumple todo es una lista de un solo elemento
+		public void remove() {
+			if (this.aux != null) { // la lista no esta vacia
+				if (!hasNext()) { // el siguiente es null
+					if (anterior == aux) {// si se cumple todo es una lista de un solo elemento
 						this.anterior = null;
 						this.aux = null;
-					}else {
+					} else {
 						this.anterior.setSigNodo(null);
 					}
-				}else {
+				} else {
 					this.anterior.setSigNodo(this.aux.getSigNodo());
 					this.aux.setSigNodo(null);
 				}
-				
+
 				this.anterior.setSigNodo(this.aux.getSigNodo());
 				this.aux.setSigNodo(null);
-    	   }
+			}
  /*    		Nodo aux = this.aux.getSigNodo();
     		this.aux.setSigNodo(this.aux.getSigNodo().getSigNodo());
     		aux.setSigNodo(null);
