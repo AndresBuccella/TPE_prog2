@@ -1,0 +1,3 @@
+Los nodos tienen que apuntar a un Object?
+los comparadores comparan Object? Eso es posible?
+esta bien que deleteAllOccurrences elimine usando un comparator???
