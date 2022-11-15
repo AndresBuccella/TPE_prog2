@@ -9,10 +9,10 @@ public class Main2 {
 
 	public static void main(String[] args) {
 		Alumno a = new Alumno("Andres", "Buccella", 1);
-		Alumno b = new Alumno("Andres", "Buccella", 2);
-		Alumno c = new Alumno("Andres", "Buccella", 3);
+		Alumno b = new Alumno("Guillermo", "Scipioni", 2);
+		Alumno c = new Alumno("Ivan", "Perez", 3);
 		Alumno d = new Alumno("Facundo", "Corvalan", 4);
-		Alumno e = new Alumno("Andres", "Buccella", 5);
+		Alumno e = new Alumno("Ramon", "Pereyra", 5);
 		Alumno f = new Alumno("Cristiano", "Ronaldo", 6);
 		Alumno g = new Alumno("Ramon", "Perez", 7);
 		Alumno h = new Alumno("Andres", "Gomez", 8);
@@ -33,7 +33,7 @@ public class Main2 {
 		Comparator compDniI = new ComparadorInverso(compDni);
 		Comparator compuesto = new ComparadorCompuesto(compApellido, compNombre);
 		Comparator compuestoFinal = new ComparadorCompuesto(compuesto, compDni);
-		Lista raiz = new Lista(n07,compApellidoI);
+		Lista raiz = new Lista(n07,compNombre);
 		raiz.addNodo(n01);
 		raiz.addNodo(n02);
 		raiz.addNodo(n03);
@@ -47,6 +47,11 @@ public class Main2 {
 		}
 		raiz.reOrdenarPor(compuestoFinal);
 		System.out.println("compuestoFinal");
+		for(Object n : raiz) {
+			System.out.println(n);
+		}
+		System.out.println("deleteAllOccurrences");
+		raiz.deleteAllOccurrences(b);
 		for(Object n : raiz) {
 			System.out.println(n);
 		}

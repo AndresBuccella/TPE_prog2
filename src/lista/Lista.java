@@ -66,7 +66,7 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 	public void addNodo(Nodo otro) {
 		if (otro != null && otro.getContenido() != null) { // esta bien que 50000 veces pregunte lo mismo siendo que no
 			if (this.puntero != null) {					  // cambia?
-				if (comp.compare(raiz.getContenido(), otro.getContenido()) == 1) {
+				if (comp.compare(raiz.getContenido(), otro.getContenido()) >= 1) {
 					otro.setSigNodo(raiz);
 					this.setOrigen(otro);
 				} else 
@@ -74,7 +74,7 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 						puntero.setSigNodo(otro);
 						this.setPuntero(raiz);
 				} else 
-					if (comp.compare(this.puntero.getSigNodo().getContenido(), otro.getContenido()) == 1) {
+					if (comp.compare(this.puntero.getSigNodo().getContenido(), otro.getContenido()) >= 1) {
 						otro.setSigNodo(getSigNodoLista());
 						this.puntero.setSigNodo(otro);
 						this.setPuntero(raiz);
@@ -99,7 +99,7 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 		aEliminar.setSigNodo(null);
 	}
 
-	public void deleteAllOccurrences(Nodo otro, Comparator<Object> comp) { // esta bien que dependa de un comparator? y
+	public void deleteAllOccurrences(Object otro) { // esta bien que dependa de un comparator? y
 																			// si otro es null?
 		// tiene sentido que se le mande un objeto? SI porque puede querer eliminar por
 		// dni
@@ -109,38 +109,35 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 		if (otro == null) {
 
 			System.out.println("soy null");
-		} else if (otro.getContenido() == null) {
-
-			System.out.println("mi contenido es null");
 		}
 		if (this.puntero != null) {
-			if (comp.compare(this.puntero.getContenido(), otro.getContenido()) == 0) {// si es el primero, se elimina y
+			if (comp.compare(this.puntero.getContenido(), otro) == 0) {// si es el primero, se elimina y
 																						// apunta al segundo y se vuelve
 																						// a
 				this.raiz = this.raiz.getSigNodo();
 				this.deleteNodo(this.puntero);
 				this.puntero = this.raiz;
-				this.deleteAllOccurrences(otro, comp);
+				this.deleteAllOccurrences(otro);
 			} else if (this.puntero.getSigNodo() != null) {
-				if (comp.compare(this.puntero.getSigNodo().getContenido(), otro.getContenido()) == 0) {// si no es donde
+				if (comp.compare(this.puntero.getSigNodo().getContenido(), otro) == 0) {// si no es donde
 																										// estas parado
 																										// y es el
 					this.deleteSig(); // siguiente, lo borra y se vuelve a llamar
 					// System.out.println(this.puntero.getSigNodo());
-					this.deleteAllOccurrences(otro, comp);
+					this.deleteAllOccurrences(otro);
 				} else if (((comp.compare(this.puntero.getContenido(), this.puntero.getSigNodo().getContenido()) >= 0)
-						&& (comp.compare(this.puntero.getSigNodo().getContenido(), otro.getContenido()) == 1))
+						&& (comp.compare(this.puntero.getSigNodo().getContenido(), otro) >= 1))
 						// si esta ordenado de mayor a menor (siendo menor o igual el siguiente)
 						// y el siguiente es mayor al buscado, sigue. Si se pone == no recorre si son
 						// iguales
 						|| ((comp.compare(this.puntero.getContenido(), this.puntero.getSigNodo().getContenido()) <= 0)
 								&& (comp.compare(this.puntero.getSigNodo().getContenido(),
-										otro.getContenido()) == -1))) {
+										otro) <= -1))) {
 					// si esta ordenado de menor a mayor (siendo mayor o igual el siguiente)
 					// y el siguiente es menor al buscado, sigue. Si se pone == no recorre si son
 					// iguales
 					this.next();
-					this.deleteAllOccurrences(otro, comp);
+					this.deleteAllOccurrences(otro);
 				}
 			}
 			this.setPuntero(this.raiz);
