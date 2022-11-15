@@ -12,7 +12,7 @@ public class ComparaPorApellido implements Comparator<Object>{
 		Alumno a2 = (Alumno) o2;
 		if(a1.getApellido().compareTo(a2.getApellido()) >= 1)
 			return 1;
-		else if(a1.getApellido().compareTo(a2.getApellido()) >= -1)
+		else if(a1.getApellido().compareTo(a2.getApellido()) <= -1)
 			return -1;
 		else
 			return 0;

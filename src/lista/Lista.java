@@ -11,10 +11,12 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 	private Nodo raiz;
 	private Nodo puntero;
 	private String auxToString; // discutible
-
-	public Lista(Nodo primerNodo) {
+	private Comparator<Object> comp;
+	
+	public Lista(Nodo primerNodo, Comparator<Object>comp) {
 		this.setOrigen(primerNodo);
 		this.auxToString = "";
+		this.comp = comp;
 	}
 
 	// setters
@@ -58,7 +60,7 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 		this.setPuntero(getSigNodoLista());
 	}
 
-	public void addNodo(Nodo otro, Comparator<Object> comp) {
+	public void addNodo(Nodo otro) {
 		if (otro != null && otro.getContenido() != null) { // esta bien que 50000 veces pregunte lo mismo siendo que no
 			if (this.puntero != null) {					  // cambia?
 				if (comp.compare(raiz.getContenido(), otro.getContenido()) == 1) {
@@ -75,7 +77,7 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 						this.setPuntero(raiz);
 				} else {
 					this.next();
-					this.addNodo(otro, comp);// recursion
+					this.addNodo(otro);// recursion
 				}
 			} else
 				this.setOrigen(otro);
@@ -172,7 +174,7 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 				while(nAux != null) {
 					AuxDeAux = nAux;
 					nAux = nAux.getSigNodo();
-					this.addNodo(AuxDeAux, comp);
+					this.addNodo(AuxDeAux);
 				}
 				//this.puntero = nSuperAux;
 				/*for(Nodo nSuperAux = nAux; nSuperAux != null; nSuperAux = nSuperAux.getSigNodo()) {
@@ -282,6 +284,7 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 	}
 
 	public static void main(String[] args) {
+		
 		Alumno a = new Alumno("Andres", "Buccella", 1);
 		Alumno b = new Alumno("Guillermo", "Scippioni", 2);
 		Alumno c = new Alumno("Alan", "Paker", 3);
@@ -298,20 +301,21 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 		Nodo n05 = new Nodo(f);
 		Nodo n06 = new Nodo(g);
 		Nodo n07 = new Nodo(h);
-		Lista raiz = new Lista(n07);
+		
 		Comparator compNombre = new ComparaPorNombre();
 		Comparator compNombreI = new ComparadorInverso(compNombre);
 		Comparator compApellido = new ComparaPorApellido();
 		Comparator compApellidoI = new ComparadorInverso(compApellido); //no anda .-.
-		Comparator compDni = new ComparaPorDni();
-		Comparator compDniI = new ComparadorInverso(compDni);
-		raiz.addNodo(n01, compApellidoI);
-		raiz.addNodo(n02, compApellidoI);
-		raiz.addNodo(n03, compApellidoI);
-		raiz.addNodo(n04, compApellidoI);
-		raiz.addNodo(n05, compApellidoI);
-		raiz.addNodo(n06, compApellidoI);
-		raiz.addNodo(n0, compApellidoI);
+		//Comparator compDni = new ComparaPorDni();
+		//Comparator compDniI = new ComparadorInverso(compDni);
+		Lista raiz = new Lista(n07,compApellidoI);
+		raiz.addNodo(n01);
+		raiz.addNodo(n02);
+		raiz.addNodo(n03);
+		raiz.addNodo(n04);
+		raiz.addNodo(n05);
+		raiz.addNodo(n06);
+		raiz.addNodo(n0);
 		for(Object n : raiz) {
 			System.out.println(n);
 		}
