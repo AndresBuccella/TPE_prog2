@@ -4,17 +4,19 @@ import java.util.Comparator;
 
 import tpe.Alumno;
 
-public class ComparadorInverso implements Comparator<Alumno>{
+public class ComparadorInverso implements Comparator<Object>{
 
-	private Comparator<Alumno> comp;
+	private Comparator<Object> comp;
 	
-	public ComparadorInverso(Comparator<Alumno> comp) {
+	public ComparadorInverso(Comparator<Object> comp) {
 		this.comp = comp;
 	}
 
 	@Override
-	public int compare(Alumno o1, Alumno o2) {
-		return -(this.comp.compare(o1, o2));
+	public int compare(Object o1, Object o2) {
+		Alumno a1 = (Alumno) o1;
+		Alumno a2 = (Alumno) o2;
+		return -(this.comp.compare(a1, a2));
 	}
 
 }

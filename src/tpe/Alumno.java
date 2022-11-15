@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Alumno extends Persona{ //alumno o persona?
 
-	private String nombre, apellido;
+	private String nombre;
+	private String apellido;
 	private int dni;
 	private ArrayList<String> intereses;
 	
@@ -16,7 +17,7 @@ public class Alumno extends Persona{ //alumno o persona?
 	}
 
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 
 	public void setNombre(String nombre) {
@@ -24,7 +25,7 @@ public class Alumno extends Persona{ //alumno o persona?
 	}
 
 	public String getApellido() {
-		return apellido;
+		return this.apellido;
 	}
 
 	public void setApellido(String apellido) {
@@ -32,7 +33,7 @@ public class Alumno extends Persona{ //alumno o persona?
 	}
 
 	public int getDni() {
-		return dni;
+		return this.dni;
 	}
 
 	public void setDni(int dni) {
