@@ -35,6 +35,9 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 	public void setPuntero(Nodo n) {
 		this.puntero = n;
 	}
+	public void setComparador(Comparator<Object> comp) {
+		this.comp = comp;
+	}
 
 	// getters
 
@@ -166,6 +169,7 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 	public void reOrdenarPor(Comparator<Object> comp) {
 //		if(this.puntero!=null) { No tiene sentido preguntar porque se supone que se carga cuando se instancia el objeto
 //		}Mentira, tiene sentido, porque si eliminas todos los nodos y los queres reordenar da error
+		this.setComparador(comp);
 		if(this.puntero!=null) {
 			if(this.puntero.getSigNodo()!=null) {
 				Nodo nAux = this.puntero.getSigNodo();
@@ -174,66 +178,11 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 				while(nAux != null) {
 					AuxDeAux = nAux;
 					nAux = nAux.getSigNodo();
+					AuxDeAux.setSigNodo(null);
 					this.addNodo(AuxDeAux);
 				}
-				//this.puntero = nSuperAux;
-				/*for(Nodo nSuperAux = nAux; nSuperAux != null; nSuperAux = nSuperAux.getSigNodo()) {
-			}*/
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-/*		this.puntero = this.raiz;
-		if(this.puntero.getSigNodo()!=null) {
-			for(Nodo nAux = this.raiz; nAux != null; nAux = nAux.getSigNodo()) {
-				this.puntero = nAux.getSigNodo();
-				if(this.puntero!=null) {
-					nAux.setSigNodo(this.puntero.getSigNodo());
-					this.puntero.setSigNodo(null);
-					this.addNodo(this.puntero, comp);					
-				}
-			}
-		}
-		this.puntero = this.raiz;*/
-		
-		
-		
-		
-		
-		
-		
-/* Iterator devuelve alumno :_
- * 		for (Object n : this) {
-			System.out.println(n.getClass());
-			Nodo nP = (Nodo) n;
-			this.setPuntero(nP);
-			if (nP.getSigNodo() != null) {
-				this.setPuntero(this.puntero.getSigNodo());
-				nP.setSigNodo(this.puntero.getSigNodo());
-				this.puntero.setSigNodo(null);
-				this.addNodo(this.puntero, comp);
-			}
-		}*/
-		
-/*		Nodo raizAux = this.raiz;
-		for (this.puntero = this.raiz; this.puntero != null; setPuntero(this.puntero.getSigNodo())) {
-			Nodo punteroAux;
-			if(this.puntero.getSigNodo()!=null) {
-				for(punteroAux = this.puntero; punteroAux != null; punteroAux = punteroAux.getSigNodo()) {
-					if(0==0) {
-						
-					}				
-				}
-			}
-		}*/
 	}
 
 	public String toString() {// no se como hacer para no usar un auxiliar
@@ -282,115 +231,4 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 			System.out.println(nAux);
 		}
 	}
-
-	public static void main(String[] args) {
-		
-		Alumno a = new Alumno("Andres", "Buccella", 1);
-		Alumno b = new Alumno("Guillermo", "Scippioni", 2);
-		Alumno c = new Alumno("Alan", "Paker", 3);
-		Alumno d = new Alumno("Facundo", "Corvalan", 4);
-		Alumno e = new Alumno("Maria", "Reca", 5);
-		Alumno f = new Alumno("Cristiano", "Ronaldo", 6);
-		Alumno g = new Alumno("Ramon", "Perez", 7);
-		Alumno h = new Alumno("Sebastian", "Gomez", 8);
-		Nodo n0 = new Nodo(a);
-		Nodo n01 = new Nodo(b);
-		Nodo n02 = new Nodo(c);
-		Nodo n03 = new Nodo(d);
-		Nodo n04 = new Nodo(e);
-		Nodo n05 = new Nodo(f);
-		Nodo n06 = new Nodo(g);
-		Nodo n07 = new Nodo(h);
-		
-		Comparator compNombre = new ComparaPorNombre();
-		Comparator compNombreI = new ComparadorInverso(compNombre);
-		Comparator compApellido = new ComparaPorApellido();
-		Comparator compApellidoI = new ComparadorInverso(compApellido); //no anda .-.
-		//Comparator compDni = new ComparaPorDni();
-		//Comparator compDniI = new ComparadorInverso(compDni);
-		Lista raiz = new Lista(n07,compApellidoI);
-		raiz.addNodo(n01);
-		raiz.addNodo(n02);
-		raiz.addNodo(n03);
-		raiz.addNodo(n04);
-		raiz.addNodo(n05);
-		raiz.addNodo(n06);
-		raiz.addNodo(n0);
-		for(Object n : raiz) {
-			System.out.println(n);
-		}
-/*		raiz.reOrdenarPor(compNombreI);
-		System.out.println("--------------------");
-		System.out.println("reorden NI");
-		for(Object n : raiz) {
-			System.out.println(n);
-		}
-		raiz.reOrdenarPor(compApellido);
-		System.out.println("--------------------");
-		System.out.println("reorden A");
-		System.out.println("--------------------");
-		for(Object n : raiz) {
-			System.out.println(n);
-		}
-		raiz.reOrdenarPor(compApellidoI);
-		System.out.println("--------------------");
-		System.out.println("reorden AI");
-		System.out.println("--------------------");
-		for(Object n : raiz) {
-			System.out.println(n);
-		}
-		raiz.reOrdenarPor(compDni);
-		System.out.println("--------------------");
-		System.out.println("reorden Dni");
-		System.out.println("--------------------");
-		for(Object n : raiz) {
-			System.out.println(n);
-		}
-		raiz.reOrdenarPor(compDniI);
-		System.out.println("--------------------");
-		System.out.println("reorden DniI");
-		System.out.println("--------------------");
-		for(Object n : raiz) {
-			System.out.println(n);
-		}*/
-		/*
-		 * raiz.addNodo(n02, comp); raiz.addNodo(n03, comp);
-		 *//*
-			 * for(Object nodo : raiz) { System.out.println(nodo); }
-			 * System.out.println("----"); System.out.println(raiz);
-			 * 
-			 * raiz.deleteAllOccurrences(n01, comp);
-			 
-		for (Object nodo : raiz) {
-			System.out.println(nodo);
-		}*/
-		/*
-		 * System.out.println("Delete all ocurrences "+n0); for(Object nodo : raiz) {
-		 * System.out.println(nodo); }
-		 * 
-		 * System.out.println("Borrar en posicion 11"); raiz.deleteByPos(11);
-		 * 
-		 * for(Object nodo : raiz) { System.out.println(nodo); } // raiz.addNodo(n3,
-		 * comp); // raiz.addNodo(n11, comp); // System.out.println(raiz); //
-		 * System.out.println(raiz); // raiz.deleteAllOccurrences(n41, comp); //
-		 * System.out.println(raiz); // System.out.println(n0); //
-		 * System.out.println(n1); // System.out.println(n2); //System.out.println(n0);
-		 * 
-		 * // n1.addNodo(n1); /* raiz.addNodo(n9, comp); raiz.addNodo(n4, comp);
-		 * raiz.addNodo(n3, comp); raiz.addNodo(n6, comp); raiz.addNodo(n5, comp);
-		 * raiz.addNodo(n7, comp); raiz.addNodo(n8, comp); raiz.addNodo(n2, comp);
-		 * raiz.addNodo(n10, comp); raiz.addNodo(n11, comp);
-		 */
-		// System.out.println(n7.obtenerPos(9));
-		// System.out.println(n2.obtenerPos(3));
-		// raiz.deleteNodo(10);
-
-		// System.out.println(raiz);
-		// raiz.deleteAllOccurrences(n1, comp);
-		// System.out.println(raiz);
-		// System.out.println(n7);
-		// System.out.println(n2); //se puede imprimir el anterior? como agregar menor
-		// al primero
-	}
-
 }
