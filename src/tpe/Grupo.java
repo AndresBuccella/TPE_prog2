@@ -31,5 +31,6 @@ public class Grupo extends ElementoAbs{ //compuesto
 	
 	public String toString() {
 		return this.getNombre() + ": " + "[" + this.listaElementos.toString() + "]" + "\n";
-	}
+	}	
+	
 }

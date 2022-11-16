@@ -6,13 +6,23 @@ public class Alumno extends ElementoAbs{ //alumno o persona?
 
 	private String apellido;
 	private int dni;
+	private int edad;
 	private ArrayList<String> intereses;
 	
-	public Alumno(String nombre, String apellido, int dni) {
+	public Alumno(String nombre, String apellido, int dni, int edad) {
 		super(nombre);
 		this.apellido = apellido;
 		this.dni = dni;
+		this.edad = edad;
 		this.intereses = new ArrayList<>();
+	}
+
+	public int getEdad() {
+		return edad;
+	}
+
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
 
 	public String getApellido() {
@@ -56,7 +66,7 @@ public class Alumno extends ElementoAbs{ //alumno o persona?
 					this.getDni() == a.getDni())
 				return true;
 		}catch(Exception e) {
-			System.out.println(e);
+			return false;
 		}
 		return false;
 	}

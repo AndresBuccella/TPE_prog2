@@ -15,6 +15,6 @@ public abstract class ElementoAbs {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public abstract int getCantidad();
 }

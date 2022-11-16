@@ -63,8 +63,8 @@ public class Main4 {
 		System.out.println("Punto D");
 		System.out.println("-------------------------------");
 
-		String sa = "Es";
 		String sb = "Facil";
+		String sa = "Es";
 		String sc = "Parcial";
 		String sd = "Prog2";
 
@@ -82,13 +82,14 @@ public class Main4 {
 		listaVinculadaString.addNodo(ns2);
 		listaVinculadaString.addNodo(ns3);
 
-
+		//E
 		System.out.println("-------------------------------");
 		System.out.println("Punto E");
 		System.out.println("-------------------------------");
 		for (Object s : listaVinculadaString)
 			System.out.println(s);
 
+		//F
 		System.out.println("-------------------------------");
 		System.out.println("Punto F");
 		System.out.println("-------------------------------");
@@ -96,6 +97,7 @@ public class Main4 {
 		String saa= new String(sc);
 		System.out.println(listaVinculadaString.obtenerPos(saa));
 		
+		//G
 		System.out.println("-------------------------------");
 		System.out.println("Punto G");
 		System.out.println("-------------------------------");
@@ -103,7 +105,7 @@ public class Main4 {
 		String sab= "Recuperatorio";
 		System.out.println(listaVinculadaString.obtenerPos(sab));
 		
-		//E
+		//H
 		System.out.println("-------------------------------");
 		System.out.println("Punto H");
 		System.out.println("-------------------------------");
@@ -127,13 +129,13 @@ public class Main4 {
 		
 		Grupo carrera = new Grupo("Historia", compCantidad);
 		
-		Alumno fede = new Alumno("Federico", "Lopez", 35999888);
+		Alumno fede = new Alumno("Federico", "Lopez", 35999888, 20);
 		fede.addInteres("redes");
 		fede.addInteres("php");
 		fede.addInteres("java");
 		fede.addInteres("Python");
 
-		Alumno juana = new Alumno("Juana", "Garcia", 27123455);
+		Alumno juana = new Alumno("Juana", "Garcia", 27123455, 20);
 		juana.addInteres("programacion");
 		juana.addInteres("php");
 		juana.addInteres("java");
@@ -141,30 +143,30 @@ public class Main4 {
 		facultad1.addElemento(fede);
 		facultad1.addElemento(juana);
 
-		Alumno flora = new Alumno("Flora", "Rivas", 34555111);
+		Alumno flora = new Alumno("Flora", "Rivas", 34555111, 20);
 		flora.addInteres("historia");
 		flora.addInteres("antigua");
 
-		Alumno martin = new Alumno("Martin", "Gomez", 34111222);
+		Alumno martin = new Alumno("Martin", "Gomez", 34111222, 20);
 		martin.addInteres("romanos");
 		martin.addInteres("egipcios");
 		martin.addInteres("griegos");
 
-		Alumno roman = new Alumno("Roman", "Bazan", 32555111);
+		Alumno roman = new Alumno("Roman", "Bazan", 32555111, 20);
 		roman.addInteres("argentina");
 
 		carrera.addElemento(flora);
 		carrera.addElemento(martin);
 		carrera.addElemento(roman);
 		
-		Alumno mora = new Alumno("Mora", "Diaz", 37124425);
+		Alumno mora = new Alumno("Mora", "Diaz", 37124425, 20);
 		mora.addInteres("psicologia");
 		mora.addInteres("Freud");
 
 		facultad2.addElemento(carrera);
 		facultad2.addElemento(mora);
 		
-		Alumno john = new Alumno("John", "Doe", 12000000);
+		Alumno john = new Alumno("John", "Doe", 12000000, 20);
 		john.addInteres("intercambio");
 		
 		
@@ -175,6 +177,43 @@ public class Main4 {
 		
 		System.out.println(universidad);
 		
+
+		System.out.println("-------------------------------");
+		System.out.println("Punto I segundo composite");
+		System.out.println("-------------------------------");
 		
+		Grupo olimpiadas = new Grupo("Olimpiadas Matematicas", compCantidad);
+		
+		Grupo grupo1 = new Grupo("Matea2", compCantidad);		
+		Grupo grupo2 = new Grupo("LosFibo", compCantidad);
+
+		Alumno juan = new Alumno("Juan", "Juarez", 32222444, 20);
+		juan.addInteres("sucesiones");
+		juan.addInteres("algebra");
+
+		Alumno julio = new Alumno("Julio", "Cesar", 33222111, 20);
+		julio.addInteres("sucesiones");
+		julio.addInteres("algebra");
+
+		grupo1.addElemento(juan);
+		grupo1.addElemento(julio);
+		
+		Alumno bernandino = new Alumno("Bernandino", "Rivas", 30987654, 20);
+		bernandino.addInteres("matematicas");
+		
+		Alumno jose = new Alumno("Jose", "Paso", 33322112, 20);
+		jose.addInteres("problemas");	
+		
+		Alumno isaac = new Alumno("Isaac", "Newton", 12343565, 20);
+		isaac.addInteres("sucesiones");
+
+		grupo2.addElemento(bernandino);
+		grupo2.addElemento(jose);
+		grupo2.addElemento(isaac);
+
+		olimpiadas.addElemento(grupo1);
+		olimpiadas.addElemento(grupo2);
+		
+		System.out.println(olimpiadas);
 	}
 }
