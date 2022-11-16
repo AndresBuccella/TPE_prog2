@@ -13,8 +13,7 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 	private String auxToString; // discutible
 	private Comparator<Object> comp;
 	
-	public Lista(Nodo primerNodo, Comparator<Object>comp) {
-		this.setOrigen(primerNodo);
+	public Lista(Comparator<Object>comp) {
 		this.auxToString = "";
 		this.comp = comp;
 	}
@@ -62,7 +61,16 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 	public void next() {
 		this.setPuntero(getSigNodoLista());
 	}
-
+	
+	public int cantNodos() {
+		int contador = 0;
+		Iterator<Object> it = iterator();
+		for(Object n : this) {
+			contador++;
+		}
+		return contador;		
+	}
+	
 	public void addNodo(Nodo otro) {
 		if (otro != null && otro.getContenido() != null) { // esta bien que 50000 veces pregunte lo mismo siendo que no
 			if (this.puntero != null) {					  // cambia?
@@ -99,48 +107,32 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 		aEliminar.setSigNodo(null);
 	}
 
-	public void deleteAllOccurrences(Object otro) { // esta bien que dependa de un comparator? y
-																			// si otro es null?
-		// tiene sentido que se le mande un objeto? SI porque puede querer eliminar por
-		// dni
-		// pero hay que crear un objeto cada vez que quiera eliminar
-		// se tiene que crear otro objeto identico al que se quiere eliminar
-		// o que posea las caracteristicas minimas
+	public void deleteAllOccurrences(Object otro) {
 		if (otro == null) {
-
 			System.out.println("soy null");
-		}
-		if (this.puntero != null) {
-			if (comp.compare(this.puntero.getContenido(), otro) == 0) {// si es el primero, se elimina y
-																						// apunta al segundo y se vuelve
-																						// a
-				this.raiz = this.raiz.getSigNodo();
-				this.deleteNodo(this.puntero);
-				this.puntero = this.raiz;
-				this.deleteAllOccurrences(otro);
-			} else if (this.puntero.getSigNodo() != null) {
-				if (comp.compare(this.puntero.getSigNodo().getContenido(), otro) == 0) {// si no es donde
-																										// estas parado
-																										// y es el
-					this.deleteSig(); // siguiente, lo borra y se vuelve a llamar
-					// System.out.println(this.puntero.getSigNodo());
+		}else {
+			if (this.puntero != null) {
+				if (this.puntero.getContenido().equals(otro)) {// si es el primero, se elimina y
+					// apunta al segundo y se vuelve
+					// a
+					this.raiz = this.raiz.getSigNodo();
+					this.deleteNodo(this.puntero);
+					this.puntero = this.raiz;
 					this.deleteAllOccurrences(otro);
-				} else if (((comp.compare(this.puntero.getContenido(), this.puntero.getSigNodo().getContenido()) >= 0)
-						&& (comp.compare(this.puntero.getSigNodo().getContenido(), otro) >= 1))
-						// si esta ordenado de mayor a menor (siendo menor o igual el siguiente)
-						// y el siguiente es mayor al buscado, sigue. Si se pone == no recorre si son
-						// iguales
-						|| ((comp.compare(this.puntero.getContenido(), this.puntero.getSigNodo().getContenido()) <= 0)
-								&& (comp.compare(this.puntero.getSigNodo().getContenido(),
-										otro) <= -1))) {
-					// si esta ordenado de menor a mayor (siendo mayor o igual el siguiente)
-					// y el siguiente es menor al buscado, sigue. Si se pone == no recorre si son
-					// iguales
-					this.next();
-					this.deleteAllOccurrences(otro);
+				} else if (this.puntero.getSigNodo() != null) {
+					if (this.puntero.getSigNodo().getContenido().equals(otro)) {// si no es donde
+						// estas parado
+						// y es el
+						this.deleteSig(); // siguiente, lo borra y se vuelve a llamar
+						// System.out.println(this.puntero.getSigNodo());
+						this.deleteAllOccurrences(otro);
+					} else{
+						this.next();
+						this.deleteAllOccurrences(otro);
+					}
 				}
+				this.setPuntero(this.raiz);
 			}
-			this.setPuntero(this.raiz);
 		}
 
 	}
@@ -161,6 +153,18 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 				deleteByPos(pos);
 			}
 		}
+	}
+	
+	public int obtenerPos(Object o1) {
+		int contador = 0;
+		Iterator<Object> it = iterator();
+		while (it.hasNext()) {
+			if (o1.equals(it.next()))
+				return contador;
+			else
+				contador++;
+		}
+		return -1;
 	}
 
 	public void reOrdenarPor(Comparator<Object> comp) {

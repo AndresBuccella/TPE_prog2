@@ -10,6 +10,7 @@ public class Main2 {
 	public static void main(String[] args) {
 		Alumno a = new Alumno("Andres", "Buccella", 1);
 		Alumno b = new Alumno("Guillermo", "Scipioni", 2);
+		Alumno j = new Alumno("Guillermo", "Scipioni", 20);
 		Alumno c = new Alumno("Ivan", "Perez", 3);
 		Alumno d = new Alumno("Facundo", "Corvalan", 4);
 		Alumno e = new Alumno("Ramon", "Pereyra", 5);
@@ -24,6 +25,7 @@ public class Main2 {
 		Nodo n05 = new Nodo(f);
 		Nodo n06 = new Nodo(g);
 		Nodo n07 = new Nodo(h);
+		Nodo n08 = new Nodo(j);
 		
 		Comparator compNombre = new ComparaPorNombre();
 		Comparator compNombreI = new ComparadorInverso(compNombre);
@@ -33,7 +35,7 @@ public class Main2 {
 		Comparator compDniI = new ComparadorInverso(compDni);
 		Comparator compuesto = new ComparadorCompuesto(compApellido, compNombre);
 		Comparator compuestoFinal = new ComparadorCompuesto(compuesto, compDni);
-		Lista raiz = new Lista(n07,compNombre);
+		Lista raiz = new Lista(compNombre);
 		raiz.addNodo(n01);
 		raiz.addNodo(n02);
 		raiz.addNodo(n03);
@@ -41,6 +43,7 @@ public class Main2 {
 		raiz.addNodo(n05);
 		raiz.addNodo(n06);
 		raiz.addNodo(n0);
+		raiz.addNodo(n08);
 		System.out.println("Nombre");
 		for(Object n : raiz) {
 			System.out.println(n);
@@ -51,7 +54,7 @@ public class Main2 {
 			System.out.println(n);
 		}
 		System.out.println("deleteAllOccurrences");
-		raiz.deleteAllOccurrences(b);
+		raiz.deleteAllOccurrences(a);
 		for(Object n : raiz) {
 			System.out.println(n);
 		}

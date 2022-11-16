@@ -2,26 +2,17 @@ package tpe;
 
 import java.util.ArrayList;
 
-public class Alumno extends Persona{ //alumno o persona?
+public class Alumno extends ElementoAbs{ //alumno o persona?
 
-	private String nombre;
 	private String apellido;
 	private int dni;
 	private ArrayList<String> intereses;
 	
 	public Alumno(String nombre, String apellido, int dni) {
-		this.nombre = nombre;
+		super(nombre);
 		this.apellido = apellido;
 		this.dni = dni;
 		this.intereses = new ArrayList<>();
-	}
-
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public String getApellido() {
@@ -46,9 +37,27 @@ public class Alumno extends Persona{ //alumno o persona?
 		}
 	}
 	
+	public int getCantidad() {
+		return 1;
+	}
+	
 	public String toString() {
-		return "Nombre: " + this.nombre + ", " +
+		return "[" + "Nombre: " + this.getNombre() + ", " +
 				"Apellido: " + this.apellido + ", " +
-				"DNI: " + this.dni;
+				"DNI: " + this.dni + 
+				this.intereses + "]";
+	}
+	
+	public boolean equals(Object o) {
+		try {
+			Alumno a = (Alumno) o;
+			if(this.getNombre().equals(a.getNombre()) &&
+					this.getApellido().equals(a.getApellido()) &&
+					this.getDni() == a.getDni())
+				return true;
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return false;
 	}
 }

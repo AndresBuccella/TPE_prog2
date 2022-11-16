@@ -1,3 +1,4 @@
-Los nodos tienen que apuntar a un Object?
-los comparadores comparan Object? Eso es posible?
-esta bien que deleteAllOccurrences elimine usando un comparator???
+Los nodos tienen que apuntar a un Object? -A un T
+los comparadores comparan Object? Eso es posible? -Si
+Está bien que deleteAllOccurrences elimine usando un comparator??? Que tiene que eliminar? Tiene que eliminar todo el nodo, pero lo hicimos comparando los alumnos.
+Constante en codigo de grupo
