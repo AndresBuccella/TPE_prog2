@@ -108,7 +108,7 @@ public class Main4 {
 		System.out.println("Punto H");
 		System.out.println("-------------------------------");
 		
-		Comparator compInverso = new ComparadorInverso(compS);
+		Comparator<Object> compInverso = new ComparadorInverso(compS);
 		listaVinculadaString.reOrdenarPor(compInverso);
 		
 		for (Object s : listaVinculadaString)
@@ -118,7 +118,7 @@ public class Main4 {
 		System.out.println("Punto I");
 		System.out.println("-------------------------------");
 		
-		Comparator compCantidad = new ComparadorInverso(new ComparadorPorCantidad());
+		Comparator<Object> compCantidad = new ComparadorInverso(new ComparadorPorCantidad());
 		
 		Grupo universidad = new Grupo("unicen", compCantidad);
 		
