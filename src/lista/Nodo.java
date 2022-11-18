@@ -16,14 +16,12 @@ public class Nodo {
 		return this.sigNodo;
 	}
 
-	public void setContenido(Object a) { //se podria fusionar con deleteContenido?
+	public void setContenido(Object a) {
 		if(this.contenido == null)
 			this.contenido = a;
 		else
 			if (a == null)
 				this.contenido = a;
-			else
-				System.out.println("Ya estaba vacio, como el corazon de ella"); //CONSTANTE EN CODIGOOOOO
 	}
 	
 	public Object getContenido() {

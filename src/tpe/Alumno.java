@@ -2,7 +2,7 @@ package tpe;
 
 import java.util.ArrayList;
 
-public class Alumno extends ElementoAbs{ //alumno o persona?
+public class Alumno extends ElementoAbs{
 
 	private String apellido;
 	private int dni;

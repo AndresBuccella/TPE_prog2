@@ -10,7 +10,7 @@ public class Lista implements Iterable<Object> {
 
 	private Nodo raiz;
 	private Nodo puntero;
-	private String auxToString; // discutible
+	private String auxToString;
 	private Comparator<Object> comp;
 	
 	public Lista(Comparator<Object>comp) {
@@ -72,8 +72,8 @@ public class Lista implements Iterable<Object> {
 	}
 	
 	public void addNodo(Nodo otro) {
-		if (otro != null && otro.getContenido() != null) { // esta bien que 50000 veces pregunte lo mismo siendo que no
-			if (this.puntero != null) {					  // cambia?
+		if (otro != null && otro.getContenido() != null) {
+			if (this.puntero != null) {
 				if (comp.compare(raiz.getContenido(), otro.getContenido()) >= 1) {
 					otro.setSigNodo(raiz);
 					this.setOrigen(otro);
@@ -88,12 +88,11 @@ public class Lista implements Iterable<Object> {
 						this.setPuntero(raiz);
 				} else {
 					this.next();
-					this.addNodo(otro);// recursion
+					this.addNodo(otro);
 				}
 			} else
 				this.setOrigen(otro);
-		}else
-			System.out.println("Algo de otro en addNodo es null"); //constante en codigooo!!!
+		}
 	}
 
 	public void deleteSig() {
@@ -113,18 +112,15 @@ public class Lista implements Iterable<Object> {
 		}else {
 			if (this.puntero != null) {
 				if (this.puntero.getContenido().equals(otro)) {// si es el primero, se elimina y
-					// apunta al segundo y se vuelve
-					// a
+																// apunta al segundo y se vuelve a llamar
 					this.raiz = this.raiz.getSigNodo();
 					this.deleteNodo(this.puntero);
 					this.puntero = this.raiz;
 					this.deleteAllOccurrences(otro);
 				} else if (this.puntero.getSigNodo() != null) {
 					if (this.puntero.getSigNodo().getContenido().equals(otro)) {// si no es donde
-						// estas parado
-						// y es el
-						this.deleteSig(); // siguiente, lo borra y se vuelve a llamar
-						// System.out.println(this.puntero.getSigNodo());
+											// estas parado y es el siguiente, lo borra y se vuelve a llamar
+						this.deleteSig(); 
 						this.deleteAllOccurrences(otro);
 					} else{
 						this.next();
@@ -168,8 +164,6 @@ public class Lista implements Iterable<Object> {
 	}
 
 	public void reOrdenarPor(Comparator<Object> comp) {
-//		if(this.puntero!=null) { No tiene sentido preguntar porque se supone que se carga cuando se instancia el objeto
-//		}Mentira, tiene sentido, porque si eliminas todos los nodos y los queres reordenar da error
 		this.setComparador(comp);
 		if(this.puntero!=null) {
 			if(this.puntero.getSigNodo()!=null) {
@@ -186,7 +180,7 @@ public class Lista implements Iterable<Object> {
 		}
 	}
 
-	public String toString() {// no se como hacer para no usar un auxiliar
+	public String toString() {
 		if (this.puntero != null) {
 			while (this.hasNext()) {
 				auxToString += this.puntero.toString() + " ";
@@ -200,6 +194,7 @@ public class Lista implements Iterable<Object> {
 		} else
 			return null;
 	}
+	
 	public Iterator<Object> iterator() {
 		return new IteradorNodos();
 	}
@@ -218,7 +213,7 @@ public class Lista implements Iterable<Object> {
 
 		@Override
 		public Object next() {
-			Object aux = this.actual.getContenido(); // EH ACA!
+			Object aux = this.actual.getContenido();
 			this.actual = this.actual.getSigNodo();
 			return aux;
 		}
