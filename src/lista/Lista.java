@@ -6,7 +6,7 @@ import java.util.Iterator;
 import tpe.*;
 import tpe.comparador.*;
 
-public class Lista implements Iterable<Object> { // objeto o nodo?
+public class Lista implements Iterable<Object> {
 
 	private Nodo raiz;
 	private Nodo puntero;
@@ -198,9 +198,8 @@ public class Lista implements Iterable<Object> { // objeto o nodo?
 			this.setPuntero(this.raiz);
 			return resultado;
 		} else
-			return "Lista vacia"; // ver otra forma de informar esto
+			return null;
 	}
-
 	public Iterator<Object> iterator() {
 		return new IteradorNodos();
 	}

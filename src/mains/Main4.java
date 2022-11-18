@@ -121,6 +121,11 @@ public class Main4 {
 		System.out.println("-------------------------------");
 		
 		Comparator<Object> compCantidad = new ComparadorInverso(new ComparadorPorCantidad());
+		Comparator<Object> compNombre = new ComparaPorNombre();
+		Comparator<Object> compApellido = new ComparaPorApellido();
+		Comparator<Object> compDni = new ComparaPorDni();
+		Comparator<Object> compuesto = new ComparadorCompuesto(compApellido, compNombre);
+		Comparator<Object> compuestoFinal = new ComparadorCompuesto(compuesto, compDni);
 		
 		Grupo universidad = new Grupo("unicen", compCantidad);
 		
@@ -174,10 +179,9 @@ public class Main4 {
 		universidad.addElemento(facultad1);
 		universidad.addElemento(facultad2);
 		universidad.addElemento(john);
-		
+
 		System.out.println(universidad);
 		
-
 		System.out.println("-------------------------------");
 		System.out.println("Punto I segundo composite");
 		System.out.println("-------------------------------");
@@ -213,7 +217,21 @@ public class Main4 {
 
 		olimpiadas.addElemento(grupo1);
 		olimpiadas.addElemento(grupo2);
-		
+
 		System.out.println(olimpiadas);
+		
+		System.out.println("-------------------------------");
+		System.out.println("Punto I lista de composites");
+		System.out.println("-------------------------------");
+		
+		Nodo nodo1 = new Nodo(universidad);
+		Nodo nodo2 = new Nodo(olimpiadas);
+
+		Lista listaVinculada = new Lista(compCantidad);
+		listaVinculada.addNodo(nodo1);
+		listaVinculada.addNodo(nodo2);
+		
+		System.out.println(listaVinculada);
+		
 	}
 }

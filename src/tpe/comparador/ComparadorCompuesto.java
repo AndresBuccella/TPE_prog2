@@ -3,6 +3,7 @@ package tpe.comparador;
 import java.util.Comparator;
 
 import tpe.Alumno;
+import tpe.ElementoAbs;
 
 public class ComparadorCompuesto implements Comparator<Object>{
 

@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import lista.*;
 
-public class Grupo extends ElementoAbs{ //compuesto
+public class Grupo extends ElementoAbs{
 	
 	private Lista listaElementos;
 	
@@ -23,7 +23,7 @@ public class Grupo extends ElementoAbs{ //compuesto
 	}
 	
 	public void addElemento(ElementoAbs e) {
-		if(this.listaElementos.obtenerPos(e) == -1) { //CONSTANTE EN CODIGO
+		if(this.listaElementos.obtenerPos(e) == -1) {
 			Nodo aAgregar = new Nodo(e);
 			this.listaElementos.addNodo(aAgregar);
 		}

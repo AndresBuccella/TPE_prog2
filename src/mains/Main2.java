@@ -30,7 +30,7 @@ public class Main2 {
 		Comparator compNombre = new ComparaPorNombre();
 		Comparator compNombreI = new ComparadorInverso(compNombre);
 		Comparator compApellido = new ComparaPorApellido();
-		Comparator compApellidoI = new ComparadorInverso(compApellido); //no anda .-.
+		Comparator compApellidoI = new ComparadorInverso(compApellido);
 		Comparator compDni = new ComparaPorDni();
 		Comparator compDniI = new ComparadorInverso(compDni);
 		Comparator compuesto = new ComparadorCompuesto(compApellido, compNombre);

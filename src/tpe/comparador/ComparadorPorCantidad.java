@@ -17,7 +17,6 @@ public class ComparadorPorCantidad implements Comparator<Object>{
 				return -1;
 		return 0;
 		}catch(Exception e) {
-			System.out.println("No puedo porque: " + e);
 			return 0;
 		}
 	}
