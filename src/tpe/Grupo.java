@@ -4,28 +4,26 @@ import java.util.Comparator;
 
 import lista.*;
 
-public class Grupo extends ElementoAbs{
+public class Grupo<T> extends ElementoAbs<T>{
 	
-	private Lista listaElementos;
+	private Lista<ElementoAbs<T>> listaElementos;
 	
-	public Grupo(String nombre, Comparator<Object> comp) {
+	public Grupo(String nombre, Comparator<T> comp) {
 		super(nombre);
-		this.listaElementos = new Lista(comp);
+		this.listaElementos = new Lista<ElementoAbs<T>>(comp);
 	}
 
 	public int getCantidad() {
 		int aux = 0;
-		for(Object n : listaElementos) {
-			ElementoAbs nn = (ElementoAbs) n;
-			aux += nn.getCantidad();
+		for(ElementoAbs<T> n : listaElementos) {
+			aux += n.getCantidad();
 		}
 		return aux;
 	}
 	
-	public void addElemento(ElementoAbs e) {
+	public void addElemento(ElementoAbs<T> e) {
 		if(this.listaElementos.obtenerPos(e) == -1) {
-			Nodo aAgregar = new Nodo(e);
-			this.listaElementos.addNodo(aAgregar);
+			this.listaElementos.add(e);
 		}
 	}
 	

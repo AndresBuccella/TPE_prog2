@@ -1,6 +1,6 @@
 package tpe;
 
-public abstract class ElementoAbs {
+public abstract class ElementoAbs<T> {
 
 	private String nombre;
 	

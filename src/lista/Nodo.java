@@ -1,22 +1,22 @@
 package lista;
 
-public class Nodo {
+public class Nodo<T> {
 
-	private Nodo sigNodo;
-	private Object contenido;
+	private Nodo<T> sigNodo;
+	private T contenido;
 
-	public Nodo(Object contenido) {
+	public Nodo(T contenido) {
 		this.contenido = contenido;
 	}
-	public void setSigNodo(Nodo sig) {
+	public void setSigNodo(Nodo<T> sig) {
 		this.sigNodo = sig;
 	}
 
-	public Nodo getSigNodo() {
+	public Nodo<T> getSigNodo() {
 		return this.sigNodo;
 	}
 
-	public void setContenido(Object a) {
+	public void setContenido(T a) {
 		if(this.contenido == null)
 			this.contenido = a;
 		else
@@ -24,7 +24,7 @@ public class Nodo {
 				this.contenido = a;
 	}
 	
-	public Object getContenido() {
+	public T getContenido() {
 		return this.contenido;
 	}
 

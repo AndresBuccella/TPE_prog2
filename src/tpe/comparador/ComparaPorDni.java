@@ -4,12 +4,10 @@ import java.util.Comparator;
 
 import tpe.Alumno;
 
-public class ComparaPorDni  implements Comparator<Object>{
+public class ComparaPorDni  implements Comparator<Alumno>{
 
 	@Override
-	public int compare(Object o1, Object o2) {
-		Alumno a1 = (Alumno) o1;
-		Alumno a2 = (Alumno) o2;
+	public int compare(Alumno a1, Alumno a2) {
 		if(a1.getDni() > a2.getDni())
 			return 1;
 		else if(a1.getDni() < a2.getDni())
