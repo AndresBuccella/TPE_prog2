@@ -1,6 +1,6 @@
 package tpe;
 
-public abstract class ElementoAbs<T> {
+public abstract class ElementoAbs {
 
 	private String nombre;
 	
@@ -18,9 +18,9 @@ public abstract class ElementoAbs<T> {
 
 	public abstract int getCantidad();
 	
-	public boolean equals(ElementoAbs<T> o) { //no deberia ser object??
+	public boolean equals(Object o) { //deberia ser object o ElementoAbs??
 		try {
-			ElementoAbs<T> e = (ElementoAbs<T>) o;
+			ElementoAbs e = (ElementoAbs) o;
 			if(this.getNombre().equals(e.getNombre()))
 				return true;
 			else

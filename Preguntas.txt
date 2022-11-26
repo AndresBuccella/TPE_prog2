@@ -33,3 +33,6 @@ V Comparadores: Hacer cada comparador del tipo que se necesita. Evitar casting.
 Saludos!
 
 - Pasar todo a tipo T
+
+
+Mejorable deleteAllOccurrences

@@ -3,11 +3,11 @@ package tpe.comparador;
 import java.util.Comparator;
 import tpe.ElementoAbs;
 
-public class ComparaPorNombre<T> implements Comparator<ElementoAbs<T>>{
+public class ComparaPorNombre<T> implements Comparator<ElementoAbs>{
 
 	@Override
-	public int compare(ElementoAbs<T> a1,ElementoAbs<T> a2) {
-		return new ComparadorString().compare(a1.getNombre(), a2.getNombre());
+	public int compare(ElementoAbs a1,ElementoAbs a2) {
+		return a1.getNombre().compareTo(a2.getNombre());
 	}
 
 }

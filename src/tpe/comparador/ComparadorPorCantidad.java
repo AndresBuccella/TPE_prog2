@@ -4,9 +4,9 @@ import java.util.Comparator;
 
 import tpe.ElementoAbs;
 
-public class ComparadorPorCantidad<T> implements Comparator<ElementoAbs<T>> {
+public class ComparadorPorCantidad<T> implements Comparator<ElementoAbs> {
 
-	public int compare(ElementoAbs<T> e1, ElementoAbs<T> e2) {
+	public int compare(ElementoAbs e1, ElementoAbs e2) {
 		if (e1.getCantidad() > e2.getCantidad())
 			return 1;
 		else if (e1.getCantidad() < e2.getCantidad())

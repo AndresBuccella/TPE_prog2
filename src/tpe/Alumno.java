@@ -2,7 +2,7 @@ package tpe;
 
 import java.util.ArrayList;
 
-public class Alumno<T> extends ElementoAbs<T>{
+public class Alumno extends ElementoAbs{
 
 	private String apellido;
 	private int dni;
@@ -60,7 +60,7 @@ public class Alumno<T> extends ElementoAbs<T>{
 	
 	public boolean equals(Object o) {
 		try {
-			Alumno<T> a = (Alumno<T>) o;
+			Alumno a = (Alumno) o;
 			if(this.getNombre().equals(a.getNombre()) &&
 					this.getApellido().equals(a.getApellido()) &&
 					this.getDni() == a.getDni())

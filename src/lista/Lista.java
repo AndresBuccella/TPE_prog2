@@ -33,11 +33,30 @@ public class Lista<T> implements Iterable<T> {
 		return this.cantNodos;
 	}
 
-	public void add(T contenido) { // funciona pero no se me ocurrio sc sin el boolean que corte
+	public void add(T contenido) { //noanda
 
-		boolean nodoAgregado = false;
+		
 		Nodo<T> nNuevo = new Nodo<T>(contenido);
-		if (this.raiz != null) {
+		if (this.raiz == null) {
+			this.raiz = nNuevo;
+		}else {
+			Nodo<T> puntero = raiz;
+			while(puntero.getSigNodo()!=null && (comp.compare(puntero.getSigNodo().getContenido(), contenido) < 1)) {
+				puntero = puntero.getSigNodo();
+				System.out.println("1");
+			}
+			if(puntero.getSigNodo()==null) {
+				puntero.setSigNodo(nNuevo);
+				System.out.println("2");
+			}else {
+				nNuevo.setSigNodo(puntero.getSigNodo());
+				puntero = nNuevo;
+				System.out.println("3");
+			}
+		}
+			
+	/*	boolean nodoAgregado = false;  FUNCIONA PERO TIENE BOOLEAN
+	 * if (this.raiz != null) {
 			Nodo<T> puntero = raiz;
 			if (comp.compare(puntero.getContenido(), contenido) >= 1) {// primero
 				nNuevo.setSigNodo(raiz);
@@ -55,7 +74,7 @@ public class Lista<T> implements Iterable<T> {
 					puntero.setSigNodo(nNuevo);
 			}
 		} else
-			raiz = nNuevo;
+			raiz = nNuevo;*/
 
 		this.cantNodos++;
 	}
@@ -69,87 +88,27 @@ public class Lista<T> implements Iterable<T> {
 	public void deleteNodo(Nodo<T> aEliminar) {
 		aEliminar.setContenido(null);
 		aEliminar.setSigNodo(null);
-		this.cantNodos--;
 	}
 
-	public void deleteAllOccurrences(T contenido) {//FALTAAAAAAAAAAAAAAAAAA
+	public void deleteAllOccurrences(T contenido) {
 		if(this.raiz!=null) {
 			Nodo<T> puntero = this.raiz;
 			while(puntero!=null) {
-				if(comp.compare(puntero.getContenido(), contenido) == 0) {
+				if(puntero.getContenido().equals(contenido)) {
 					puntero = puntero.getSigNodo();
 					this.deleteNodo(this.raiz);
 					this.raiz = puntero;
-				}
-				
-			puntero = puntero.getSigNodo();
-			}
-/*			if((siguiente==null) && (comp.compare(actual.getContenido(), contenido) == 0))
-			if(comp.compare(actual.getContenido(), contenido) == 0){
-				this.deleteNodo(this.raiz);
-				this.raiz = siguiente;
-				actual = siguiente;
-				siguiente = siguiente.getSigNodo();
-			}
-			while((comp.compare(puntero.getSigNodo().getContenido(), contenido) != 0)&&
-					puntero.getSigNodo()!=null) {
-				
-			}*/		
-		}
-		
-		
-		
-		
-		
-		
-		
-/*		if (this.raiz != null) {
-			Nodo puntero = raiz;
-			while ((puntero.getSigNodo() != null)&&(comp.compare(puntero.getContenido(), otro.getContenido()) >= 1)) {
-				puntero = puntero.getSigNodo();
-			}
-			if (pos == 0) {
-				if (puntero.getSigNodo() == null) {
-					raiz = null;
-					this.cantNodos = 0;
-				} else {
-					puntero = puntero.getSigNodo();
-					this.deleteNodo(this.raiz);
-					this.raiz = puntero;
-				}
-			} else {
-				if (pos == 1)
-					this.deleteSig(puntero);
-			}
-
-		}
-		
-		
-		if (otro == null) {
-			System.out.println("soy null");
-		} else {
-			if (this.puntero != null) {
-				if (this.puntero.getContenido().equals(otro)) {// si es elprimero, se elimina y // apunta al segundo y
-																// se vuelve a llamar this.raiz =
-					this.raiz.getSigNodo();
-					this.deleteNodo(this.puntero);
-					this.puntero = this.raiz;
-					this.deleteAllOccurrences(otro);
-				} else if (this.puntero.getSigNodo() != null) {
-					if (this.puntero.getSigNodo().getContenido().equals(otro)) {// si no es donde //estas parado y es el
-																				// siguiente, lo borra y se vuelve a
-																				// llamar
-						this.deleteSig();
-						this.deleteAllOccurrences(otro);
-					} else {
-						this.next();
-						this.deleteAllOccurrences(otro);
+				}else {
+					while(puntero.getSigNodo()!=null) {
+						if (!puntero.getSigNodo().getContenido().equals(contenido)) {
+							puntero = puntero.getSigNodo();							
+						}else
+							this.deleteSig(puntero);
 					}
 				}
-				this.setPuntero(this.raiz);
+				puntero = puntero.getSigNodo();
 			}
-		}*/
-
+		}
 	}
 
 	public void deleteByPos(int pos) { //V
@@ -172,7 +131,6 @@ public class Lista<T> implements Iterable<T> {
 				if (pos == 1)
 					this.deleteSig(puntero);
 			}
-
 		}
 	}
 
@@ -189,8 +147,6 @@ public class Lista<T> implements Iterable<T> {
 	}
 
 	private void reOrdenar() { // V
-
-		
 		if (this.raiz != null) {
 			if (this.raiz.getSigNodo() != null) {
 				Nodo<T> puntero = this.raiz;
@@ -203,49 +159,20 @@ public class Lista<T> implements Iterable<T> {
 					this.add(nodoAux.getContenido());
 				}
 			}
-
 		}
-		
-		
-/* Asi lo planteo Mati, pero no sirve para nuestro codigo
- * 
- * 		if (this.raiz != null) {
-			Nodo<T> puntero = this.raiz;
-			this.raiz = null;
-			while (puntero != null) {
-				this.addNodo(puntero);
-				puntero = puntero.getSigNodo();
-			}
-		}*/
-		
-/*		if (this.raiz != null) {
-			if (this.raiz.getSigNodo() != null) {
-				Nodo<T> puntero = this.raiz.getSigNodo();
-				this.raiz.setSigNodo(null);
-				this.cantNodos++;
-				Nodo<T> nodoAux;
-				while (puntero != null) {
-					nodoAux = puntero;
-					puntero = puntero.getSigNodo();
-					nodoAux.setSigNodo(null);
-					this.addNodo(nodoAux);
-				}
-			}
-
-		}*/
 	}
 
-//	public String toString() {// es necesario??
+	public String toString() {// V
+		Nodo<T> puntero = this.raiz;
+		String aux = "";
+		while(puntero!=null) {
+			aux += puntero.toString() + "\n";
+			puntero = puntero.getSigNodo();
+		}
+		return aux;
+	 }
 
-	/*
-	 * if (this.puntero != null) { while (this.hasNext()) { auxToString +=
-	 * this.puntero.toString() + " "; this.next(); } auxToString +=
-	 * this.puntero.toString(); String resultado = auxToString; auxToString = "";
-	 * this.setPuntero(this.raiz); return resultado; } else return null;
-	 */
-	// }
-
-	public Iterator<T> iterator() { // mandar Nodo raiz
+	public Iterator<T> iterator() { // V
 		return new IteratorNodos<T>(this.raiz);
 	}
 }

@@ -4,10 +4,10 @@ import java.util.Comparator;
 
 import tpe.Alumno;
 
-public class ComparaPorApellido<T> implements Comparator<Alumno<T>>{
+public class ComparaPorApellido<T> implements Comparator<Alumno>{
 
 	@Override
-	public int compare(Alumno<T> a1, Alumno<T> a2) {
+	public int compare(Alumno a1, Alumno a2) {
 		return new ComparadorString().compare(a1.getApellido(), a2.getApellido());
 	}
 

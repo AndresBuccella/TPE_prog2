@@ -116,7 +116,7 @@ public class Main4 {
 		Comparator<ElementoAbs> compuesto = new ComparadorCompuesto(compApellido, compNombre);
 		Comparator<ElementoAbs> compuestoFinal = new ComparadorCompuesto(compuesto, compDni);
 		
-		Grupo<ElementoAbs<T>> universidad = new Grupo<ElementoAbs<T>>("unicen", compCantidad);
+		Grupo universidad = new Grupo("unicen", compCantidad);
 		
 		Grupo facultad1 = new Grupo("exactas", compCantidad);
 		Grupo facultad2 = new Grupo("humanas", compCantidad);
@@ -217,8 +217,8 @@ public class Main4 {
 		Nodo nodo2 = new Nodo(olimpiadas);
 
 		Lista listaVinculada = new Lista(compCantidad);
-		listaVinculada.addNodo(nodo1);
-		listaVinculada.addNodo(nodo2);
+		listaVinculada.add(nodo1);
+		listaVinculada.add(nodo2);
 		
 		System.out.println(listaVinculada);
 		
