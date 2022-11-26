@@ -20,14 +20,15 @@ V Lista cantNodos: si la cantidad de nodos es un atributo que se suma/resta cada
 	se agrega/elimina un nodo, no es necesario recorrer cada vez que se necesita la 
 	cantidad de nodos.
 	
-- Iterador: el iterador debería recibir por parámetro el primer nodo de la lista. 
+V Iterador: el iterador debería recibir por parámetro el primer nodo de la lista. 
 	Recomiendo hacer el Iterador en una clase a parte.
 	
-- Grupo: la lista de elementos dentro del grupo puede ser un Arraylist. De utilizar 
+V Grupo: la lista de elementos dentro del grupo puede ser un Arraylist. De utilizar 
 	una lista vinculada deben especificar el tipo (Lista<ElemUniversidad>) y NO 
-	hacer casting en los métodos. Falta implementar el equals.
+	hacer casting en los métodos. 
+???	Falta implementar el equals.
 	
-- Comparadores: Hacer cada comparador del tipo que se necesita. Evitar casting.
+V Comparadores: Hacer cada comparador del tipo que se necesita. Evitar casting.
 
 Saludos!
 

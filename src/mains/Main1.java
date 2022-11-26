@@ -3,6 +3,7 @@ package mains;
 import java.util.Comparator;
 
 import lista.*;
+import tpe.ElementoAbs;
 import tpe.comparador.*;
 
 

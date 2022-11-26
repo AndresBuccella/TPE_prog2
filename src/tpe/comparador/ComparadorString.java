@@ -2,8 +2,6 @@ package tpe.comparador;
 
 import java.util.Comparator;
 
-import tpe.Alumno;
-
 public class ComparadorString implements Comparator<String>{
 
 	@Override

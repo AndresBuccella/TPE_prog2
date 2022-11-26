@@ -4,20 +4,13 @@ import java.util.Comparator;
 
 import tpe.ElementoAbs;
 
-public class ComparadorPorCantidad implements Comparator<Object>{
+public class ComparadorPorCantidad<T> implements Comparator<ElementoAbs<T>> {
 
-	public int compare(Object o1, Object o2){
-		try {
-		ElementoAbs e1 = (ElementoAbs) o1;
-		ElementoAbs e2 = (ElementoAbs) o2;
-		if(e1.getCantidad() > e2.getCantidad())
+	public int compare(ElementoAbs<T> e1, ElementoAbs<T> e2) {
+		if (e1.getCantidad() > e2.getCantidad())
 			return 1;
-		else
-			if(e1.getCantidad() < e2.getCantidad())
-				return -1;
+		else if (e1.getCantidad() < e2.getCantidad())
+			return -1;
 		return 0;
-		}catch(Exception e) {
-			return 0;
-		}
 	}
 }

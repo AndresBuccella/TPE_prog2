@@ -17,43 +17,39 @@ public class Main2 {
 		Alumno f = new Alumno("Cristiano", "Ronaldo", 6, 20);
 		Alumno g = new Alumno("Ramon", "Perez", 7, 20);
 		Alumno h = new Alumno("Andres", "Gomez", 8, 20);
-		Nodo n0 = new Nodo(a);
-		Nodo n01 = new Nodo(b);
-		Nodo n02 = new Nodo(c);
-		Nodo n03 = new Nodo(d);
-		Nodo n04 = new Nodo(e);
-		Nodo n05 = new Nodo(f);
-		Nodo n06 = new Nodo(g);
-		Nodo n07 = new Nodo(h);
-		Nodo n08 = new Nodo(j);
 		
-		Comparator compNombre = new ComparaPorNombre();
-		Comparator compNombreI = new ComparadorInverso(compNombre);
-		Comparator compApellido = new ComparaPorApellido();
-		Comparator compApellidoI = new ComparadorInverso(compApellido);
-		Comparator compDni = new ComparaPorDni();
-		Comparator compDniI = new ComparadorInverso(compDni);
-		Comparator compuesto = new ComparadorCompuesto(compApellido, compNombre);
-		Comparator compuestoFinal = new ComparadorCompuesto(compuesto, compDni);
-		Lista raiz = new Lista(compNombre);
-		raiz.addNodo(n01);
-		raiz.addNodo(n02);
-		raiz.addNodo(n03);
-		raiz.addNodo(n04);
-		raiz.addNodo(n05);
-		raiz.addNodo(n06);
-		raiz.addNodo(n0);
-		raiz.addNodo(n08);
+		Comparator<Alumno> compNombre = new ComparaPorNombre();
+		Comparator<Alumno> compNombreI = new ComparadorInverso(compNombre);
+		Comparator<Alumno> compApellido = new ComparaPorApellido();
+		Comparator<Alumno> compApellidoI = new ComparadorInverso(compApellido);
+		Comparator<Alumno> compDni = new ComparaPorDni();
+		Comparator<Alumno> compDniI = new ComparadorInverso(compDni);
+		Comparator<Alumno> compuesto = new ComparadorCompuesto(compApellido, compNombre);
+		Comparator<Alumno> compuestoFinal = new ComparadorCompuesto(compuesto, compDni);
+		Lista<Alumno> raiz = new Lista<Alumno>(compNombre);
+		raiz.add(a);
+		raiz.add(b);
+		raiz.add(c);
+		raiz.add(d);
+		raiz.add(e);
+		raiz.add(f);
+		raiz.add(g);
+		raiz.add(h);
+		raiz.add(j);
 		System.out.println("Nombre");
 		for(Object n : raiz) {
 			System.out.println(n);
 		}
-		raiz.reOrdenarPor(compuestoFinal);
+		raiz.setComparador(compuestoFinal);
+		System.out.println("------------------------------------------------");
 		System.out.println("compuestoFinal");
+		System.out.println("------------------------------------------------");
 		for(Object n : raiz) {
 			System.out.println(n);
 		}
+		System.out.println("------------------------------------------------");
 		System.out.println("deleteAllOccurrences");
+		System.out.println("------------------------------------------------");
 		raiz.deleteAllOccurrences(a);
 		for(Object n : raiz) {
 			System.out.println(n);

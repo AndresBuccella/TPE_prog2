@@ -8,7 +8,7 @@ public class Grupo<T> extends ElementoAbs<T>{
 	
 	private Lista<ElementoAbs<T>> listaElementos;
 	
-	public Grupo(String nombre, Comparator<T> comp) {
+	public Grupo(String nombre, Comparator<ElementoAbs<T>> comp) {
 		super(nombre);
 		this.listaElementos = new Lista<ElementoAbs<T>>(comp);
 	}
