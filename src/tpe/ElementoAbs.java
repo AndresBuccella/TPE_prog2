@@ -18,7 +18,7 @@ public abstract class ElementoAbs {
 
 	public abstract int getCantidad();
 	
-	public boolean equals(Object o) {
+	public boolean equals(Object o) {//preguntar si este queda como abs
 		try {
 			ElementoAbs e = (ElementoAbs) o;
 			if(this.getNombre().equals(e.getNombre()))
