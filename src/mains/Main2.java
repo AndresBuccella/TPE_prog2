@@ -32,14 +32,14 @@ public class Main2 {
 		raiz.add(c);
 		raiz.add(d);
 		raiz.add(e);
-		raiz.add(b);
-		raiz.add(b);
-		raiz.add(b);
-		raiz.add(b);
+		raiz.add(g);
+		raiz.add(g);
+		raiz.add(g);
+		raiz.add(g);
 
 		System.out.println("Nombre");
 		System.out.println("------------------------------------------------");
-		for(Object n : raiz) {
+		for(Alumno n : raiz) {
 			System.out.println(n);
 		}
 		System.out.println("------------------------------------------------");
@@ -47,24 +47,24 @@ public class Main2 {
 		System.out.println("------------------------------------------------");
 		
 		raiz.setComparador(compNombreI);
-		for(Object n : raiz) {
+		for(Alumno n : raiz) {
 			System.out.println(n);
 		}
 		System.out.println("------------------------------------------------");
 		System.out.println("compuestoFinal");
 		System.out.println("------------------------------------------------");
 		raiz.setComparador(compuestoFinal);
-		for(Object n : raiz) {
+		for(Alumno n : raiz) {
 			System.out.println(n);
 		}
+		System.out.println(raiz.getCantNodos());
 		System.out.println("------------------------------------------------");
-		System.out.println("deleteAllOccurrences no funca");
+		System.out.println("deleteAllOccurrences");
 		System.out.println("------------------------------------------------");
-		//raiz.setComparador(new ComparadorInverso(compuestoFinal));
-		raiz.deleteAllOccurrences(b);
-		for(Object n : raiz) {
+		raiz.deleteAllOccurrences(g);
+		for(Alumno n : raiz) {
 			System.out.println(n);
 		}
-		System.out.println(raiz.getRaiz() == null);
+		System.out.println(raiz.getCantNodos());
 	}
 }

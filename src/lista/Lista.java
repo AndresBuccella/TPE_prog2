@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 
+
 public class Lista<T> implements Iterable<T> {
 
 	private Nodo<T> raiz;
@@ -15,13 +16,13 @@ public class Lista<T> implements Iterable<T> {
 		this.cantNodos = 0;
 	}
 
-	public void setRaiz(Nodo<T> n) {
+/*	public void setRaiz(Nodo<T> n) { //rompen encapsulamiento/incognita
 		this.raiz = n;
 	}
 
 	public Nodo<T> getRaiz() {
 		return this.raiz;
-	}
+	}*/
 
 	public void setComparador(Comparator<T> comp) {
 		this.comp = comp;
@@ -33,49 +34,28 @@ public class Lista<T> implements Iterable<T> {
 		return this.cantNodos;
 	}
 
-	public void add(T contenido) { //noanda
-
-		
+	public void add(T contenido) { //V
 		Nodo<T> nNuevo = new Nodo<T>(contenido);
 		if (this.raiz == null) {
 			this.raiz = nNuevo;
 		}else {
 			Nodo<T> puntero = raiz;
-			while(puntero.getSigNodo()!=null && (comp.compare(puntero.getSigNodo().getContenido(), contenido) < 1)) {
-				puntero = puntero.getSigNodo();
-				System.out.println("1");
-			}
-			if(puntero.getSigNodo()==null) {
-				puntero.setSigNodo(nNuevo);
-				System.out.println("2");
+			if(comp.compare(puntero.getContenido(), contenido) >= 1) {
+				nNuevo.setSigNodo(this.raiz);
+				this.raiz = nNuevo;
 			}else {
-				nNuevo.setSigNodo(puntero.getSigNodo());
-				puntero = nNuevo;
-				System.out.println("3");
-			}
-		}
-			
-	/*	boolean nodoAgregado = false;  FUNCIONA PERO TIENE BOOLEAN
-	 * if (this.raiz != null) {
-			Nodo<T> puntero = raiz;
-			if (comp.compare(puntero.getContenido(), contenido) >= 1) {// primero
-				nNuevo.setSigNodo(raiz);
-				this.setRaiz(nNuevo);
-			} else {
-				while ((puntero.getSigNodo() != null) && (!nodoAgregado)) {// medio
-					if (comp.compare(puntero.getSigNodo().getContenido(), contenido) >= 1) {
-						nNuevo.setSigNodo(puntero.getSigNodo());
-						puntero.setSigNodo(nNuevo);
-						nodoAgregado = true;
-					}
+				while(puntero.getSigNodo()!=null && 
+						(comp.compare(puntero.getSigNodo().getContenido(), contenido) < 1)) {
 					puntero = puntero.getSigNodo();
 				}
-				if (!nodoAgregado)// ultimo
+				if(puntero.getSigNodo()==null) {
 					puntero.setSigNodo(nNuevo);
+				}else {
+					nNuevo.setSigNodo(puntero.getSigNodo());
+					puntero.setSigNodo(nNuevo);
+				}				
 			}
-		} else
-			raiz = nNuevo;*/
-
+		}
 		this.cantNodos++;
 	}
 
@@ -88,6 +68,7 @@ public class Lista<T> implements Iterable<T> {
 	public void deleteNodo(Nodo<T> aEliminar) {
 		aEliminar.setContenido(null);
 		aEliminar.setSigNodo(null);
+		this.cantNodos--;
 	}
 
 	public void deleteAllOccurrences(T contenido) {
@@ -121,7 +102,7 @@ public class Lista<T> implements Iterable<T> {
 			if (pos == 0) {
 				if (puntero.getSigNodo() == null) {
 					raiz = null;
-					this.cantNodos = 0;
+					this.cantNodos--;
 				} else {
 					puntero = puntero.getSigNodo();
 					this.deleteNodo(this.raiz);
@@ -134,8 +115,8 @@ public class Lista<T> implements Iterable<T> {
 		}
 	}
 
-	public int obtenerPos(T o1) { // ????????????????????????? para que era???
-		int contador = 0;
+	public int obtenerPos(T o1) { // ????????????????????????? para que era??? Era para saber 
+		int contador = 0;			//si la lista contenia un nodo
 		Iterator<T> it = iterator();
 		while (it.hasNext()) {
 			if (o1.equals(it.next()))

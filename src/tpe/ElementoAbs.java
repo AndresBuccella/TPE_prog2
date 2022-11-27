@@ -18,7 +18,7 @@ public abstract class ElementoAbs {
 
 	public abstract int getCantidad();
 	
-	public boolean equals(Object o) { //deberia ser object o ElementoAbs??
+	public boolean equals(Object o) {
 		try {
 			ElementoAbs e = (ElementoAbs) o;
 			if(this.getNombre().equals(e.getNombre()))

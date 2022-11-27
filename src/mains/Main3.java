@@ -2,16 +2,14 @@ package mains;
 
 import java.util.Comparator;
 
-import tpe.Alumno;
-import tpe.Grupo;
-import tpe.comparador.ComparadorInverso;
+import tpe.*;
 import tpe.comparador.ComparadorPorCantidad;
 
 public class Main3 {
 
 	public static void main(String[] args) {
 
-		Comparator<Object> compCantidad = new ComparadorPorCantidad();
+		Comparator<ElementoAbs> compCantidad = new ComparadorPorCantidad();
 		
 		Grupo universidad = new Grupo("unicen", compCantidad);
 		
