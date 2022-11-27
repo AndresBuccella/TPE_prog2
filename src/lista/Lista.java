@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 
 
+
 public class Lista<T> implements Iterable<T> {
 
 	private Nodo<T> raiz;
@@ -20,7 +21,7 @@ public class Lista<T> implements Iterable<T> {
 		this.raiz = n;
 	}
 
-	public Nodo<T> getRaiz() {
+	public T getRaiz() {
 		return this.raiz;
 	}*/
 

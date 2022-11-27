@@ -99,7 +99,7 @@ public class Main4 {
 		System.out.println("Punto H");
 		System.out.println("-------------------------------");
 		
-		Comparator<String> compInverso = new ComparadorInverso<String>(compS);
+		Comparator<String> compInverso = new ComparadorInverso(compS);
 		listaVinculadaString.setComparador(compInverso);
 		
 		for (String s : listaVinculadaString)
@@ -213,12 +213,10 @@ public class Main4 {
 		System.out.println("Punto I lista de composites");
 		System.out.println("-------------------------------");
 		
-		Nodo nodo1 = new Nodo(universidad);
-		Nodo nodo2 = new Nodo(olimpiadas);
-
-		Lista listaVinculada = new Lista(compCantidad);
-		listaVinculada.add(nodo1);
-		listaVinculada.add(nodo2);
+		Lista<ElementoAbs> listaVinculada = new Lista<ElementoAbs>(compCantidad);
+		
+		listaVinculada.add(universidad);
+		listaVinculada.add(olimpiadas);
 		
 		System.out.println(listaVinculada);
 		
