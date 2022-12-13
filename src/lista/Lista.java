@@ -3,9 +3,6 @@ package lista;
 import java.util.Comparator;
 import java.util.Iterator;
 
-
-
-
 public class Lista<T> implements Iterable<T> {
 
 	private Nodo<T> raiz;
@@ -17,14 +14,6 @@ public class Lista<T> implements Iterable<T> {
 		this.cantNodos = 0;
 	}
 
-/*	public void setRaiz(Nodo<T> n) { //rompen encapsulamiento/incognita
-		this.raiz = n;
-	}
-
-	public T getRaiz() {
-		return this.raiz;
-	}*/
-
 	public void setComparador(Comparator<T> comp) {
 		this.comp = comp;
 		this.cantNodos = 0; // se reinicia la cuenta para reordenar
@@ -35,7 +24,7 @@ public class Lista<T> implements Iterable<T> {
 		return this.cantNodos;
 	}
 
-	public void add(T contenido) { //V
+	public void add(T contenido) {
 		Nodo<T> nNuevo = new Nodo<T>(contenido);
 		if (this.raiz == null) {
 			this.raiz = nNuevo;
@@ -93,7 +82,7 @@ public class Lista<T> implements Iterable<T> {
 		}
 	}
 
-	public void deleteByPos(int pos) { //V
+	public void deleteByPos(int pos) {
 		if ((this.raiz != null) && (pos < cantNodos)) {
 			Nodo<T> puntero = raiz;
 			while ((puntero.getSigNodo() != null) && (pos > 1)) {
@@ -116,8 +105,8 @@ public class Lista<T> implements Iterable<T> {
 		}
 	}
 
-	public int obtenerPos(T o1) { // ????????????????????????? para que era??? Era para saber 
-		int contador = 0;			//si la lista contenia un nodo
+	public int obtenerPos(T o1) {
+		int contador = 0;
 		Iterator<T> it = iterator();
 		while (it.hasNext()) {
 			if (o1.equals(it.next()))
@@ -128,7 +117,7 @@ public class Lista<T> implements Iterable<T> {
 		return -1;
 	}
 
-	private void reOrdenar() { // V
+	private void reOrdenar() {
 		if (this.raiz != null) {
 			if (this.raiz.getSigNodo() != null) {
 				Nodo<T> puntero = this.raiz;
@@ -144,7 +133,7 @@ public class Lista<T> implements Iterable<T> {
 		}
 	}
 
-	public String toString() {// V
+	public String toString() {
 		Nodo<T> puntero = this.raiz;
 		String aux = "";
 		while(puntero!=null) {
@@ -154,7 +143,7 @@ public class Lista<T> implements Iterable<T> {
 		return aux;
 	 }
 
-	public Iterator<T> iterator() { // V
+	public Iterator<T> iterator() {
 		return new IteratorNodos<T>(this.raiz);
 	}
 }

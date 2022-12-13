@@ -57,7 +57,6 @@ public class Main2 {
 		for(Alumno n : raiz) {
 			System.out.println(n);
 		}
-		System.out.println(raiz.getCantNodos());
 		System.out.println("------------------------------------------------");
 		System.out.println("deleteAllOccurrences");
 		System.out.println("------------------------------------------------");
@@ -65,6 +64,5 @@ public class Main2 {
 		for(Alumno n : raiz) {
 			System.out.println(n);
 		}
-		System.out.println(raiz.getCantNodos());
 	}
 }

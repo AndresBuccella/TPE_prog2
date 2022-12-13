@@ -42,13 +42,9 @@ public class Main1 {
 		for (Object n : listaVinculadaInteger)
 			System.out.println(n);
 		System.out.println("--------------------------");
-		System.out.println("Cantidad de nodos en la lista: "+listaVinculadaInteger.getCantNodos());
-		System.out.println("--------------------------");
 		
 		listaVinculadaInteger.deleteByPos(5);
 		for (Object n : listaVinculadaInteger)
 			System.out.println(n);
-		System.out.println("--------------------------");
-		System.out.println("Cantidad de nodos en la lista: "+listaVinculadaInteger.getCantNodos());
 	}
 }
